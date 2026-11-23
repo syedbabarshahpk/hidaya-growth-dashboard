@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidaya Instagram Growth & Analytics Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: "Plus Jakarta Sans", sans-serif; background-color: #08110F; color: #F1F5F9; }
+    .glass-card { background: rgba(14, 27, 24, 0.7); border: 1px solid rgba(22, 101, 74, 0.3); backdrop-filter: blur(12px); border-radius: 16px; }
+    .glass-card-gold { background: linear-gradient(135deg, rgba(197, 154, 39, 0.08) 0%, rgba(14, 27, 24, 0.8) 100%); border: 1px solid rgba(197, 154, 39, 0.35); }
+    .gold-text { color: #E5C365; }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- Header Section -->
+    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 p-6 glass-card border-emerald-900/40">
+      <div class="flex items-center gap-4">
+        <img id="acc-pic" alt="Profile" class="w-16 h-16 rounded-2xl ring-2 ring-emerald-500/40 shadow-lg object-cover">
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 id="acc-name" class="text-2xl font-bold text-white tracking-tight"></h1>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Live Sync</span>
+          </div>
+          <p class="text-sm text-emerald-400/90 font-medium">@<span id="acc-user"></span> <span class="text-slate-400">· Islamic AI Companion 🌿</span></p>
+          <p class="text-xs text-slate-400 mt-1">Live Feed Sync (Asia/Riyadh) · Updated: <span id="last-updated"></span></p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <a id="ig-link" target="_blank" class="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-sm font-semibold rounded-xl shadow-lg transition-all flex items-center gap-2">
+          <span>Open Instagram</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- KPI Overview Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="p-5 glass-card">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Followers</p>
+        <h3 id="acc-followers" class="text-3xl font-bold text-white mt-2">--</h3>
+        <p class="text-xs text-emerald-400 mt-3 font-medium">↑ Active Organic Audience</p>
+      </div>
+
+      <div class="p-5 glass-card">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Posts Published</p>
+        <h3 id="acc-media" class="text-3xl font-bold text-white mt-2">--</h3>
+        <p class="text-xs text-amber-300 mt-3 font-medium">234 more pre-scheduled in queue</p>
+      </div>
+
+      <div class="p-5 glass-card">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Avg Likes / Post</p>
+        <h3 id="kpi-avg-likes" class="text-3xl font-bold text-white mt-2">--</h3>
+        <p class="text-xs text-purple-300 mt-3 font-medium">Total Likes Logged: <span id="kpi-total-likes">--</span></p>
+      </div>
+
+      <div class="p-5 glass-card glass-card-gold">
+        <p class="text-xs font-semibold gold-text uppercase tracking-wider">Highest Performing Slot</p>
+        <h3 class="text-2xl font-bold text-white mt-2">Evening (8:30 PM)</h3>
+        <p class="text-xs gold-text mt-3 font-medium">Peak Engagement: Tue &amp; Wed</p>
+      </div>
+    </div>
+
+    <!-- Smart Strategic Recommendations (AI Growth Playbook) -->
+    <div class="p-6 glass-card bg-gradient-to-r from-emerald-950/40 via-slate-900/60 to-amber-950/30 border border-emerald-500/30">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-xl">💡</span>
+        <h2 class="text-lg font-bold text-white tracking-wide">Data-Backed Growth Recommendations to Drive App Installs</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div class="p-4 rounded-xl bg-emerald-900/20 border border-emerald-500/20">
+          <p class="font-bold text-emerald-300 mb-1">1. Double Down on Mid-Week Evenings</p>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Posts published on <strong>Tuesday and Wednesday evenings (8:30 PM KSA)</strong> generate the highest average engagement (3.3+ likes/post vs 1.6 on Saturdays). Audiences are winding down and seeking evening Athkar/Duas.
+          </p>
+        </div>
+        <div class="p-4 rounded-xl bg-amber-900/20 border border-amber-500/20">
+          <p class="font-bold text-amber-300 mb-1">2. Afternoon Good Deeds as Save/Share Drivers</p>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            The <strong>12:30 PM (Dhuhr)</strong> slot has the highest total accumulated interactions. Action-based posts ("Good Deed ✅") prompt high dwell time. Keep the call-to-action focused on downloading Hidaya for prayer reminders.
+          </p>
+        </div>
+        <div class="p-4 rounded-xl bg-teal-900/20 border border-teal-500/20">
+          <p class="font-bold text-teal-300 mb-1">3. App Store Conversion Funnel</p>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            All captions now feature the uniform App Store search CTA (<code>Search "Hidaya" on App Store &amp; Google Play</code>). Adding a dynamic Linktree/Appsflyer smartlink in the bio will bridge Instagram traffic directly into measurable installs.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row: Engagement Trend & Time Performance -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="lg:col-span-2 p-6 glass-card">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-bold text-white">Daily Likes &amp; Posting Volume Trend</h3>
+            <p class="text-xs text-slate-400">Chronological engagement over recent posting history</p>
+          </div>
+          <span class="text-xs px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 font-semibold border border-emerald-500/20">Daily View</span>
+        </div>
+        <div class="h-64">
+          <canvas id="dailyTrendChart"></canvas>
+        </div>
+      </div>
+
+      <div class="p-6 glass-card">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-bold text-white">Performance by Time Slot</h3>
+            <p class="text-xs text-slate-400">Average likes per Riyadh schedule time</p>
+          </div>
+        </div>
+        <div class="h-64">
+          <canvas id="slotChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day of Week & Period Review -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 glass-card">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-base font-bold text-white">Best Performing Days of the Week</h3>
+            <p class="text-xs text-slate-400">Average engagement comparison across days</p>
+          </div>
+        </div>
+        <div class="h-60">
+          <canvas id="dowChart"></canvas>
+        </div>
+      </div>
+
+      <div class="p-6 glass-card flex flex-col justify-between">
+        <div>
+          <h3 class="text-base font-bold text-white mb-1">Period-Over-Period Review</h3>
+          <p class="text-xs text-slate-400 mb-4">Comparing recent performance cycles</p>
+          
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center justify-between">
+              <div>
+                <p class="text-xs text-slate-400">Today vs Yesterday</p>
+                <p class="text-sm font-bold text-white mt-0.5">Today Active (Day 16 Kickoff)</p>
+              </div>
+              <div class="text-right">
+                <span class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                  3 Scheduled Today
+                </span>
+                <p class="text-[11px] text-slate-400 mt-1">1 Live · 2 Pending</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center justify-between">
+              <div>
+                <p class="text-xs text-slate-400">Last 7 Days Output</p>
+                <p class="text-sm font-bold text-white mt-0.5">21 Posts Published</p>
+              </div>
+              <div class="text-right">
+                <span class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                  100% Cadence
+                </span>
+                <p class="text-[11px] text-slate-400 mt-1">3.0 posts/day maintained</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center justify-between">
+              <div>
+                <p class="text-xs text-slate-400">Pre-Ramadan Queue Status</p>
+                <p class="text-sm font-bold text-white mt-0.5">234 Posts Pre-Loaded</p>
+              </div>
+              <div class="text-right">
+                <span class="inline-flex items-center gap-1 text-xs font-semibold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-full">
+                  Through Feb 08, 2027
+                </span>
+                <p class="text-[11px] text-slate-400 mt-1">Full 78 days scheduled</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Post Performance Table -->
+    <div class="p-6 glass-card overflow-hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+        <div>
+          <h3 class="text-base font-bold text-white">Recent Posts Feed &amp; Metrics</h3>
+          <p class="text-xs text-slate-400">Real-time log of every post published with engagement figures</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-400">Filter by category:</span>
+          <select id="typeFilter" class="bg-slate-900 border border-slate-700 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500">
+            <option value="All">All Posts</option>
+            <option value="Hadith">Hadith</option>
+            <option value="Dua">Dua</option>
+            <option value="Good Deed">Good Deed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400 uppercase font-semibold">
+              <th class="py-3 px-3">Date &amp; Time (KSA)</th>
+              <th class="py-3 px-3">Type</th>
+              <th class="py-3 px-3">Caption Preview</th>
+              <th class="py-3 px-3">Time Slot</th>
+              <th class="py-3 px-3 text-center">Likes</th>
+              <th class="py-3 px-3 text-center">Comments</th>
+              <th class="py-3 px-3 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="postsTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const rawData = {"account": {"id": "17841400856189846", "biography": "Hidaya | Islamic AI Companion \ud83c\udf3f\nSeamless faith built around your daily routine.\n\u2022 Idrak AI \u2022 Quran \u2022 Hadith Library \u2022 Smart Adhkar", "followers_count": 4454, "follows_count": 6, "media_count": 46, "name": "Hidaya - Quran, Hadith & AI", "profile_picture_url": "https://scontent.fjed4-1.fna.fbcdn.net/v/t51.82787-15/881746786_18653160055028540_7420521650006362439_n.jpg?_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=7d201b&_nc_ohc=iItuiq3BDYYQ7kNvwF4c_hD&_nc_oc=AdqlP989hNRJAg-rMH0gmVUcaCypFpzCaxzrxRWAzzN99SEgudmcNPgoYbMgumGHt7TyrpVGX0Lo6mMEVqLfZHgv&_nc_zt=23&_nc_ht=scontent.fjed4-1.fna&edm=AJ-jyNUEAAAA&_nc_gid=_IXWspd_9_OZXDkT5FISKg&oh=00_AQSJ1tVz4ZZBGhSH7tVeSX0XxFPmRBvZI_AGDtti31OLgA&oe=6B09E01B", "username": "hidayatheapp"}, "posts": [{"id": "17918713074551251", "date": "2026-11-23", "time": "10:40", "datetime": "2026-11-23 10:40", "day": "Monday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Hadith of the Day\n\n\u0645\u064e\u0627 \u0646\u064e\u0642\u064e\u0635\u064e\u062a\u0652 \u0635\u064e\u062f\u064e\u0642\u064e\u0629\u064c \u0645\u0650\u0646\u0652 \u0645\u064e\u0627\u0644\u064d\n\n\u201cCharity never decreases wealth.\u201d\n\u2014 Sahih Muslim 2588\n\nWhich part of this speaks to you today?\n\n\ud83d\udcf2 Search \"Hidaya: Quran, Hadith & AI\" on the App Store & Google Play \u00b7 Link in bio\n\n#hadith #hadithoftheday #sunnah #islamicreminders #prophetmuhammad #muslim #deen #hidaya", "permalink": "https://www.instagram.com/p/DgE3Y7iH6RS/"}, {"id": "18121693409088508", "date": "2026-11-22", "time": "17:30", "datetime": "2026-11-22 17:30", "day": "Sunday", "slot": "Other", "type": "Hadith", "likes": 0, "comments": 0, "caption": "Dua of the Day \n\nBest for: Morning & evening \u00d73 \n\n\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u064e\u0651\u0647\u0650 \u0627\u0644\u064e\u0651\u0630\u0650\u064a \u0644\u064e\u0627 \u064a\u064e\u0636\u064f\u0631\u064f\u0651 \u0645\u064e\u0639\u064e \u0627\u0633\u0652\u0645\u0650\u0647\u0650 \u0634\u064e\u064a\u0652\u0621\u064c \u0641\u0650\u064a \u0627\u0644\u0652\u0623\u064e\u0631\u0652\u0636\u0650 \u0648\u064e\u0644\u064e\u0627 \u0641\u0650\u064a \u0627\u0644\u0633\u064e\u0651\u0645\u064e\u0627\u0621\u0650 \u0648\u064e\u0647\u064f\u0648\u064e \u0627\u0644\u0633\u064e\u0651\u0645\u0650\u064a\u0639\u064f \u0627\u0644\u0652\u0639\u064e\u0644\u0650\u064a\u0645\u064f \n\nIn the name of Allah, with whose name nothing on earth or in heaven can cause harm, and He is the All-Hearing, All-Knowing. \u2014 Sunan Abi Dawud 5088 \u00b7 Tirmidhi 3388 Teach it to someone at home. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/DgCQHPXtBRX/"}, {"id": "18102286595408130", "date": "2026-11-22", "time": "13:30", "datetime": "2026-11-22 13:30", "day": "Sunday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705 \n\nGuard your tongue: A full day with no backbiting. Change the topic if it starts. Why it matters: \u201cAnd do not backbite one another.\u201d (Qur\u2019an 49:12) \n\nComment \u2705 when you have done it, and share it with a friend. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/DgCP-VJtRja/"}, {"id": "18115512257614262", "date": "2026-11-22", "time": "10:16", "datetime": "2026-11-22 10:16", "day": "Sunday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Hadith of the Day \n\n\u0627\u062a\u064e\u0651\u0642\u0650 \u0627\u0644\u0644\u064e\u0651\u0647\u064e \u062d\u064e\u064a\u0652\u062b\u064f\u0645\u064e\u0627 \u0643\u064f\u0646\u0652\u062a\u064e\u060c \u0648\u064e\u0623\u064e\u062a\u0652\u0628\u0650\u0639\u0650 \u0627\u0644\u0633\u064e\u0651\u064a\u0650\u0651\u0626\u064e\u0629\u064e \u0627\u0644\u0652\u062d\u064e\u0633\u064e\u0646\u064e\u0629\u064e \u062a\u064e\u0645\u0652\u062d\u064f\u0647\u064e\u0627\u060c \u0648\u064e\u062e\u064e\u0627\u0644\u0650\u0642\u0650 \u0627\u0644\u0646\u064e\u0651\u0627\u0633\u064e \u0628\u0650\u062e\u064f\u0644\u064f\u0642\u064d \u062d\u064e\u0633\u064e\u0646\u064d\n\n \u201cFear Allah wherever you are, follow a bad deed with a good one to erase it, and treat people with good character.\u201d \u2014 Jami\u2019 at-Tirmidhi 1987 Tag a friend to remind them too. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/DgCP2HkNtKj/"}, {"id": "18140357785662740", "date": "2026-11-21", "time": "17:00", "datetime": "2026-11-21 17:00", "day": "Saturday", "slot": "Other", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Dua of the Day Best for: When anxious \n\n\u0627\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651 \u0625\u0650\u0646\u0650\u0651\u064a \u0623\u064e\u0639\u064f\u0648\u0630\u064f \u0628\u0650\u0643\u064e \u0645\u0650\u0646\u064e \u0627\u0644\u0652\u0647\u064e\u0645\u0650\u0651 \u0648\u064e\u0627\u0644\u0652\u062d\u064e\u0632\u064e\u0646\u0650\u060c \u0648\u064e\u0627\u0644\u0652\u0639\u064e\u062c\u0652\u0632\u0650 \u0648\u064e\u0627\u0644\u0652\u0643\u064e\u0633\u064e\u0644\u0650 \n\nO Allah, I seek refuge in You from anxiety and grief, and from incapacity and laziness. \u2014 Sahih al-Bukhari 6369 Make this your dua today. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/Df_tIrJN7rj/"}, {"id": "17955604110300315", "date": "2026-11-21", "time": "14:00", "datetime": "2026-11-21 14:00", "day": "Saturday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Good Deed of the Day \u2705 \n\nGive a gift: Give someone a small gift, even a note or a sweet. Why it matters: \u201cGive gifts to one another and you will love one another.\u201d (Al-Adab al-Mufrad 594) \n\nComment \u2705 when you have done it, and share it with a friend. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/Df_s6wetbeD/"}, {"id": "18117689503843316", "date": "2026-11-21", "time": "10:32", "datetime": "2026-11-21 10:32", "day": "Saturday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Hadith of the Day \n\n\u0645\u064e\u0646\u0652 \u0644\u064e\u0627 \u064a\u064e\u0631\u0652\u062d\u064e\u0645\u064f \u0644\u064e\u0627 \u064a\u064f\u0631\u0652\u062d\u064e\u0645\u064f \n#\u201cWhoever does not show mercy will not be shown mercy.\u201d \u2014 Sahih al-Bukhari 5997 \u00b7 Sahih Muslim 2318 How will you live this today? \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #hadithoftheday #sunnah #islamicreminders", "permalink": "https://www.instagram.com/p/Df_s06wN0ag/"}, {"id": "17973025620190315", "date": "2026-11-20", "time": "17:30", "datetime": "2026-11-20 17:30", "day": "Friday", "slot": "Other", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Dua of the Day Best for: Seeking forgiveness \n\n\u0631\u064e\u0628\u0650\u0651 \u0627\u063a\u0652\u0641\u0650\u0631\u0652 \u0644\u0650\u064a \u0648\u064e\u062a\u064f\u0628\u0652 \u0639\u064e\u0644\u064e\u064a\u064e\u0651 \u0625\u0650\u0646\u064e\u0651\u0643\u064e \u0623\u064e\u0646\u0652\u062a\u064e \u0627\u0644\u062a\u064e\u0651\u0648\u064e\u0651\u0627\u0628\u064f \u0627\u0644\u0631\u064e\u0651\u062d\u0650\u064a\u0645\u064f \n\nMy Lord, forgive me and accept my repentance. You are the Accepter of repentance, the Merciful. \u2014 Sunan Abi Dawud 1516 Send this to someone you love. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #dua #duaoftheday #dua_reminder #hidaya", "permalink": "https://www.instagram.com/p/Df9LX6CtRJp/"}, {"id": "17911087632333448", "date": "2026-11-20", "time": "13:30", "datetime": "2026-11-20 13:30", "day": "Friday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705 \n\nHelp at home: Do a household chore without being asked. Why it matters: The Prophet \ufdfa used to serve his family at home. (Sahih al-Bukhari 676) \n\nComment \u2705 when you have done it, and share it with a friend. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/Df9LOGtNdhZ/"}, {"id": "18172513849473676", "date": "2026-11-20", "time": "10:58", "datetime": "2026-11-20 10:58", "day": "Friday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 4, "comments": 0, "caption": "Hadith of the Day \n\n\u0623\u064e\u062d\u064e\u0628\u064f\u0651 \u0627\u0644\u0652\u0623\u064e\u0639\u0652\u0645\u064e\u0627\u0644\u0650 \u0625\u0650\u0644\u064e\u0649 \u0627\u0644\u0644\u064e\u0651\u0647\u0650 \u0623\u064e\u062f\u0652\u0648\u064e\u0645\u064f\u0647\u064e\u0627 \u0648\u064e\u0625\u0650\u0646\u0652 \u0642\u064e\u0644\u064e\u0651 \n\n\u201cThe most beloved deeds to Allah are the most consistent, even if small.\u201d \u2014 Sahih al-Bukhari 6464 \u00b7 Sahih Muslim 783 Share it with someone who needs it. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/Df9LDGfNSRs/"}, {"id": "18379350364242946", "date": "2026-11-19", "time": "18:00", "datetime": "2026-11-19 18:00", "day": "Thursday", "slot": "Evening (8:30 PM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Dua of the Day Best for: After every prayer \n\n\u0627\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651 \u0623\u064e\u0639\u0650\u0646\u0650\u0651\u064a \u0639\u064e\u0644\u064e\u0649 \u0630\u0650\u0643\u0652\u0631\u0650\u0643\u064e \u0648\u064e\u0634\u064f\u0643\u0652\u0631\u0650\u0643\u064e \u0648\u064e\u062d\u064f\u0633\u0652\u0646\u0650 \u0639\u0650\u0628\u064e\u0627\u062f\u064e\u062a\u0650\u0643\u064e \n\nO Allah, help me to remember You, thank You, and worship You well. \u2014 Sunan Abi Dawud 1522 Save this to recite later. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #duaoftheday #dua_reminder #quran #islamicquotes", "permalink": "https://www.instagram.com/p/Df6lLkzt8e2/"}, {"id": "17923922331456344", "date": "2026-11-19", "time": "15:00", "datetime": "2026-11-19 15:00", "day": "Thursday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705 Secret dua: \n\nMake dua for a friend by name, without telling them. Why it matters: An angel says: \u201cAmeen, and for you the same.\u201d (Sahih Muslim 2733) \n\nComment \u2705 when you have done it, and share it with a friend. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #sadaqah #dailyreminder #sunnah #muslimlife", "permalink": "https://www.instagram.com/p/Df6k-8zNtYs/"}, {"id": "18586372243072005", "date": "2026-11-19", "time": "10:46", "datetime": "2026-11-19 10:46", "day": "Thursday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Hadith of the Day\n\n \u0644\u064e\u064a\u0652\u0633\u064e \u0627\u0644\u0634\u064e\u0651\u062f\u0650\u064a\u062f\u064f \u0628\u0650\u0627\u0644\u0635\u064f\u0651\u0631\u064e\u0639\u064e\u0629\u0650\u060c \u0625\u0650\u0646\u064e\u0651\u0645\u064e\u0627 \u0627\u0644\u0634\u064e\u0651\u062f\u0650\u064a\u062f\u064f \u0627\u0644\u064e\u0651\u0630\u0650\u064a \u064a\u064e\u0645\u0652\u0644\u0650\u0643\u064f \u0646\u064e\u0641\u0652\u0633\u064e\u0647\u064f \u0639\u0650\u0646\u0652\u062f\u064e \u0627\u0644\u0652\u063a\u064e\u0636\u064e\u0628\u0650\n\n \u201cThe strong one is not the one who overpowers others. The strong one controls himself when angry.\u201d \u2014 Sahih al-Bukhari 6114 \u00b7 Sahih Muslim 2609 Save this and read it again tonight. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #hadithoftheday #sunnah #islamicreminders #prophetmuhammad", "permalink": "https://www.instagram.com/p/Df6kxlGNKDw/"}, {"id": "18149670325585179", "date": "2026-11-18", "time": "17:00", "datetime": "2026-11-18 17:00", "day": "Wednesday", "slot": "Other", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Dua of the Day Best for: Seeking forgiveness\n\n \u0627\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651 \u0625\u0650\u0646\u064e\u0651\u0643\u064e \u0639\u064e\u0641\u064f\u0648\u064c\u0651 \u062a\u064f\u062d\u0650\u0628\u064f\u0651 \u0627\u0644\u0652\u0639\u064e\u0641\u0652\u0648\u064e \u0641\u064e\u0627\u0639\u0652\u0641\u064f \u0639\u064e\u0646\u0650\u0651\u064a \n\nO Allah, You are Pardoning and love to pardon, so pardon me. \u2014 Jami\u2019 at-Tirmidhi 3513 Write Ameen below \ud83e\udd32 \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #duaoftheday #dua_reminder #quran #islamicquotes", "permalink": "https://www.instagram.com/p/Df3_cQ7NhXj/"}, {"id": "18389924851236133", "date": "2026-11-18", "time": "13:00", "datetime": "2026-11-18 13:00", "day": "Wednesday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705 \n\nOffer water: Offer water to someone today: a worker, a guest, a passer-by. Why it matters: The best charity is giving water. (Sunan Abi Dawud 1679) \n#Comment \u2705 when you have done it, and share it with a friend. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #sadaqah #dailyreminder #sunnah", "permalink": "https://www.instagram.com/p/Df3_WKptLRC/"}, {"id": "18436775161197894", "date": "2026-11-18", "time": "10:38", "datetime": "2026-11-18 10:38", "day": "Wednesday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Hadith of the Day \n\n\u0627\u0644\u0652\u0645\u064f\u0633\u0652\u0644\u0650\u0645\u064f \u0645\u064e\u0646\u0652 \u0633\u064e\u0644\u0650\u0645\u064e \u0627\u0644\u0652\u0645\u064f\u0633\u0652\u0644\u0650\u0645\u064f\u0648\u0646\u064e \u0645\u0650\u0646\u0652 \u0644\u0650\u0633\u064e\u0627\u0646\u0650\u0647\u0650 \u0648\u064e\u064a\u064e\u062f\u0650\u0647\u0650 \n\n\u201cThe Muslim is the one from whose tongue and hand people are safe.\u201d \u2014 Sahih al-Bukhari 10 \u00b7 Sahih Muslim 41 Which part of this speaks to you today? \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #hadithoftheday #sunnah #islamicreminders #prophetmuhammad", "permalink": "https://www.instagram.com/p/Df3_KroNahI/"}, {"id": "18195759406395970", "date": "2026-11-17", "time": "18:30", "datetime": "2026-11-17 18:30", "day": "Tuesday", "slot": "Evening (8:30 PM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Dua of the Day Best for: \n\nDua of the Day Best for: For a firm heart \u064a\u064e\u0627 \u0645\u064f\u0642\u064e\u0644\u0650\u0651\u0628\u064e \u0627\u0644\u0652\u0642\u064f\u0644\u064f\u0648\u0628\u0650 \u062b\u064e\u0628\u0650\u0651\u062a\u0652 \u0642\u064e\u0644\u0652\u0628\u0650\u064a \u0639\u064e\u0644\u064e\u0649 \u062f\u0650\u064a\u0646\u0650\u0643\u064e O Turner of hearts, keep my heart firm upon Your religion. \u2014 Jami\u2019 at-Tirmidhi 2140 Teach it to someone at home. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \n\nLink in bio #hidaya #duaoftheday #dua_reminder #quran", "permalink": "https://www.instagram.com/p/Df1aDezNHvW/"}, {"id": "18081626900416307", "date": "2026-11-17", "time": "12:30", "datetime": "2026-11-17 12:30", "day": "Tuesday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Good Deed of the Day \u2705 \n\nLet it go: Forgive one person who wronged you, sincerely, for Allah. Why it matters: \u201cLet them pardon and overlook. Would you not love for Allah to forgive you?\u201d (Qur\u2019an 24:22) \n\nComment \u2705 when you have done it, and share it with a friend. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #gooddeeds #hidaya #dailyreminder #sunnah #muslimlife", "permalink": "https://www.instagram.com/p/Df1Z5qVNgOj/"}, {"id": "18102838616659519", "date": "2026-11-17", "time": "10:33", "datetime": "2026-11-17 10:33", "day": "Tuesday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Hadith of the Day\n\n \u0627\u0644\u0652\u0643\u064e\u0644\u0650\u0645\u064e\u0629\u064f \u0627\u0644\u0637\u064e\u0651\u064a\u0650\u0651\u0628\u064e\u0629\u064f \u0635\u064e\u062f\u064e\u0642\u064e\u0629\u064c \n\n\u201cA good word is charity.\u201d \u2014 Sahih al-Bukhari 2989 \u00b7 Sahih Muslim 1009 Tag a friend to remind them too. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #hadithoftheday #sunnah #islamicreminders #prophetmuhammad", "permalink": "https://www.instagram.com/p/Df1ZxDctcu_/"}, {"id": "18430069990154099", "date": "2026-11-16", "time": "16:50", "datetime": "2026-11-16 16:50", "day": "Monday", "slot": "Other", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Dua of the Day Best for: Anytime \n\n\u0627\u0644\u0644\u064e\u0651\u0647\u064f\u0645\u064e\u0651 \u0625\u0650\u0646\u0650\u0651\u064a \u0623\u064e\u0633\u0652\u0623\u064e\u0644\u064f\u0643\u064e \u0627\u0644\u0652\u0647\u064f\u062f\u064e\u0649 \u0648\u064e\u0627\u0644\u062a\u064f\u0651\u0642\u064e\u0649 \u0648\u064e\u0627\u0644\u0652\u0639\u064e\u0641\u064e\u0627\u0641\u064e \u0648\u064e\u0627\u0644\u0652\u063a\u0650\u0646\u064e\u0649 \n\nO Allah, I ask You for guidance, piety, chastity and self-sufficiency. \u2014 Sahih Muslim 2721 Make this your dua today. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/Dfym3JbNw73/"}, {"id": "18646222555045597", "date": "2026-11-16", "time": "12:30", "datetime": "2026-11-16 12:30", "day": "Monday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705 \n\nCheck on the sick: Visit or message someone who is unwell and make dua for them. Why it matters: Whoever visits the sick is in the harvest of Paradise until he returns. (Sahih Muslim 2568) \n\nComment \u2705 when you have done it, and share it with a friend. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #sadaqah #dailyreminder #sunnah muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/DfymxRktaea/"}, {"id": "18499359805106286", "date": "2026-11-16", "time": "08:26", "datetime": "2026-11-16 08:26", "day": "Monday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Hadith of the Day \n\n\u0644\u064e\u0627 \u062a\u064e\u063a\u0652\u0636\u064e\u0628\u0652\n\n \u201cDo not become angry.\u201d \u2014 Sahih al-Bukhari 6116 How will you live this today? \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #hidaya #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/DfymahPN77p/"}, {"id": "18468935848188078", "date": "2026-11-15", "time": "17:30", "datetime": "2026-11-15 17:30", "day": "Sunday", "slot": "Other", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Dua of the Day Best for: For your family \n\u0631\u064e\u0628\u064e\u0651\u0646\u064e\u0627 \u0647\u064e\u0628\u0652 \u0644\u064e\u0646\u064e\u0627 \u0645\u0650\u0646\u0652 \u0623\u064e\u0632\u0652\u0648\u064e\u0627\u062c\u0650\u0646\u064e\u0627 \u0648\u064e\u0630\u064f\u0631\u0650\u0651\u064a\u064e\u0651\u0627\u062a\u0650\u0646\u064e\u0627 \u0642\u064f\u0631\u064e\u0651\u0629\u064e \u0623\u064e\u0639\u0652\u064a\u064f\u0646\u064d \u0648\u064e\u0627\u062c\u0652\u0639\u064e\u0644\u0652\u0646\u064e\u0627 \u0644\u0650\u0644\u0652\u0645\u064f\u062a\u064e\u0651\u0642\u0650\u064a\u0646\u064e \u0625\u0650\u0645\u064e\u0627\u0645\u064b\u0627 \n\nOur Lord, grant us from our spouses and children comfort to our eyes, and make us leaders of the righteous. \u2014 Qur\u2019an 25:74 Send this to someone you love. \n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #duaoftheday #dua_reminder #quran #islamicquotes #hidaya", "permalink": "https://www.instagram.com/p/DfwQFsJN1RO/"}, {"id": "17980843245158316", "date": "2026-11-15", "time": "12:30", "datetime": "2026-11-15 12:30", "day": "Sunday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705 \n\nShare a meal: Feed someone today: a colleague, a neighbour, or someone in need. Why it matters: The best of Islam is to feed people and greet those you know and don\u2019t know. (Sahih al-Bukhari 12) \n\nComment \u2705 when you have done it, and share it with a friend. \ud83d\udcf2 \n\nSearch \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio #gooddeeds #sadaqah #dailyreminder #sunnah muslimlife islamicreminder ummah hiday", "permalink": "https://www.instagram.com/p/DfwP8d8ti5c/"}, {"id": "18126617218902231", "date": "2026-11-15", "time": "08:54", "datetime": "2026-11-15 08:54", "day": "Sunday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Hadith of the Day \n\n\u0645\u0650\u0646\u0652 \u062d\u064f\u0633\u0652\u0646\u0650 \u0625\u0650\u0633\u0652\u0644\u064e\u0627\u0645\u0650 \u0627\u0644\u0652\u0645\u064e\u0631\u0652\u0621\u0650 \u062a\u064e\u0631\u0652\u0643\u064f\u0647\u064f \u0645\u064e\u0627 \u0644\u064e\u0627 \u064a\u064e\u0639\u0652\u0646\u0650\u064a\u0647\u0650 \n\u201cPart of the excellence of a person\u2019s Islam is\n leaving what does not concern him.\u201d \u2014 Jami\u2019 at-Tirmidhi 2317 Share it with someone who needs it.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google \n\nPlay \u00b7 Link in bio #hadith #hadithoftheday #sunnah #islamicreminders prophetmuhammad muslim deen hiday", "permalink": "https://www.instagram.com/p/DfwE2KWt9YE/"}, {"id": "17919625833258985", "date": "2026-11-14", "time": "20:30", "datetime": "2026-11-14 20:30", "day": "Saturday", "slot": "Evening (8:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Dua of the Day\nBest for: For your parents\n\n\u0631\u064e\u0628\u0650\u0651 \u0627\u0631\u0652\u062d\u064e\u0645\u0652\u0647\u064f\u0645\u064e\u0627 \u0643\u064e\u0645\u064e\u0627 \u0631\u064e\u0628\u064e\u0651\u064a\u064e\u0627\u0646\u0650\u064a \u0635\u064e\u063a\u0650\u064a\u0631\u064b\u0627\n\nMy Lord, have mercy upon them as they raised me when I was small.\n\u2014 Qur\u2019an 17:24\n\nSave this to recite later.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#dua #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/DfmGqFLt-70/"}, {"id": "18019388936972762", "date": "2026-11-14", "time": "12:30", "datetime": "2026-11-14 12:30", "day": "Saturday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705\n\nOne page, with meaning: Read one page of the Qur\u2019an and its translation.\n\nWhy it matters: Each letter you recite brings a reward, multiplied tenfold. (Tirmidhi 2910)\n\nComment \u2705 when you have done it, and share it with a friend.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#gooddeeds #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/DfmGME2tgbE/"}, {"id": "18078863840440623", "date": "2026-11-14", "time": "07:30", "datetime": "2026-11-14 07:30", "day": "Saturday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Hadith of the Day\n\n\u0627\u0644\u062f\u0650\u0651\u064a\u0646\u064f \u0627\u0644\u0646\u064e\u0651\u0635\u0650\u064a\u062d\u064e\u0629\u064f\n\n\u201cThe religion is sincerity.\u201d\n\u2014 Sahih Muslim 55\n\nSave this and read it again tonight.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#hadith #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/DfmF6s8tUhd/"}, {"id": "18109326092210867", "date": "2026-11-13", "time": "20:30", "datetime": "2026-11-13 20:30", "day": "Friday", "slot": "Evening (8:30 PM)", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Dua of the Day\nBest for: For steadfastness\n\n\u0631\u064e\u0628\u064e\u0651\u0646\u064e\u0627 \u0644\u064e\u0627 \u062a\u064f\u0632\u0650\u063a\u0652 \u0642\u064f\u0644\u064f\u0648\u0628\u064e\u0646\u064e\u0627 \u0628\u064e\u0639\u0652\u062f\u064e \u0625\u0650\u0630\u0652 \u0647\u064e\u062f\u064e\u064a\u0652\u062a\u064e\u0646\u064e\u0627 \u0648\u064e\u0647\u064e\u0628\u0652 \u0644\u064e\u0646\u064e\u0627 \u0645\u0650\u0646\u0652 \u0644\u064e\u062f\u064f\u0646\u0652\u0643\u064e \u0631\u064e\u062d\u0652\u0645\u064e\u0629\u064b \u0625\u0650\u0646\u064e\u0651\u0643\u064e \u0623\u064e\u0646\u0652\u062a\u064e \u0627\u0644\u0652\u0648\u064e\u0647\u064e\u0651\u0627\u0628\u064f\n\nOur Lord, do not let our hearts deviate after You have guided us, and grant us mercy from Yourself. You are the Bestower.\n\u2014 Qur\u2019an 3:8\n\nWrite Ameen below \ud83e\udd32\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#dua #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/DfmFyfINVzw/"}, {"id": "17916411021515796", "date": "2026-11-13", "time": "12:30", "datetime": "2026-11-13 12:30", "day": "Friday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705\n\nPray Duha: Pray two rak\u2019ahs of Duha between sunrise and midday.\n\nWhy it matters: Two rak\u2019ahs of Duha count as charity for every joint of your body. (Sahih Muslim 720)\n\nComment \u2705 when you have done it, and share it with a friend.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#gooddeeds #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/DfmFoG0NatA/"}, {"id": "18102864056380716", "date": "2026-11-13", "time": "07:30", "datetime": "2026-11-13 07:30", "day": "Friday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Hadith of the Day\n\n\u062e\u064e\u064a\u0652\u0631\u064f\u0643\u064f\u0645\u0652 \u0645\u064e\u0646\u0652 \u062a\u064e\u0639\u064e\u0644\u064e\u0651\u0645\u064e \u0627\u0644\u0652\u0642\u064f\u0631\u0652\u0622\u0646\u064e \u0648\u064e\u0639\u064e\u0644\u064e\u0651\u0645\u064e\u0647\u064f\n\n\u201cThe best of you are those who learn the Qur\u2019an and teach it.\u201d\n\u2014 Sahih al-Bukhari 5027\n\nWhich part of this speaks to you today?\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#hadith #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/DfmFkBWNZOv/"}, {"id": "18121323055962057", "date": "2026-11-12", "time": "20:30", "datetime": "2026-11-12 20:30", "day": "Thursday", "slot": "Evening (8:30 PM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Dua of the Day\nBest for: In distress\n\n\u0644\u064e\u0627 \u0625\u0650\u0644\u064e\u0670\u0647\u064e \u0625\u0650\u0644\u064e\u0651\u0627 \u0623\u064e\u0646\u0652\u062a\u064e \u0633\u064f\u0628\u0652\u062d\u064e\u0627\u0646\u064e\u0643\u064e \u0625\u0650\u0646\u0650\u0651\u064a \u0643\u064f\u0646\u0652\u062a\u064f \u0645\u0650\u0646\u064e \u0627\u0644\u0638\u064e\u0651\u0627\u0644\u0650\u0645\u0650\u064a\u0646\u064e\n\nThere is no god but You, glory be to You. Indeed, I have been of the wrongdoers.\n\u2014 Qur\u2019an 21:87\n\nTeach it to someone at home.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#dua #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/DfmEEgOtkej/"}, {"id": "18168681286501029", "date": "2026-11-12", "time": "12:30", "datetime": "2026-11-12 12:30", "day": "Thursday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 2, "comments": 0, "caption": "Good Deed of the Day \u2705\n\nSay salam first: Be the first to say As-salamu alaykum to everyone you meet.\n\nWhy it matters: \u201cSpread the greeting of peace among yourselves.\u201d (Sahih Muslim 54)\n\nComment \u2705 when you have done it, and share it with a friend.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#gooddeeds #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/DfmEAY5tijV/"}, {"id": "17893469004457612", "date": "2026-11-12", "time": "07:00", "datetime": "2026-11-12 07:00", "day": "Thursday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 1, "comments": 0, "caption": "Hadith of the Day\n\n\u062a\u064e\u0628\u064e\u0633\u064f\u0651\u0645\u064f\u0643\u064e \u0641\u0650\u064a \u0648\u064e\u062c\u0652\u0647\u0650 \u0623\u064e\u062e\u0650\u064a\u0643\u064e \u0644\u064e\u0643\u064e \u0635\u064e\u062f\u064e\u0642\u064e\u0629\u064c\n\n\u201cYour smile in the face of your brother is charity.\u201d\n\u2014 Jami\u2019 at-Tirmidhi 1956\n\nTag a friend to remind them too.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#hadith #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/DfmD7kjNtsp/"}, {"id": "17921049564463873", "date": "2026-11-11", "time": "20:30", "datetime": "2026-11-11 20:30", "day": "Wednesday", "slot": "Evening (8:30 PM)", "type": "Hadith", "likes": 6, "comments": 0, "caption": "Dua of the Day\nBest for: When worried\n\n\u062d\u064e\u0633\u0652\u0628\u064f\u0646\u064e\u0627 \u0627\u0644\u0644\u064e\u0651\u0647\u064f \u0648\u064e\u0646\u0650\u0639\u0652\u0645\u064e \u0627\u0644\u0652\u0648\u064e\u0643\u0650\u064a\u0644\u064f\n\nAllah is sufficient for us, and He is the best Disposer of affairs.\n\u2014 Qur\u2019an 3:173\n\nMake this your dua today.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#dua #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/DfmDxcbtD8_/"}, {"id": "18105299339457284", "date": "2026-11-11", "time": "12:30", "datetime": "2026-11-11 12:30", "day": "Wednesday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Good Deed of the Day \u2705\n\nGive, even a little: Give a small sadaqah today. Even a few coins count.\n\nWhy it matters: \u201cProtect yourself from the Fire, even with half a date.\u201d (Sahih al-Bukhari 1417)\n\nComment \u2705 when you have done it, and share it with a friend.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#gooddeeds #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/DfmDh_st-Jp/"}, {"id": "18111750059617704", "date": "2026-11-11", "time": "11:31", "datetime": "2026-11-11 11:31", "day": "Wednesday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Hadith of the Day\n\n\u0627\u0644\u0637\u064f\u0651\u0647\u064f\u0648\u0631\u064f \u0634\u064e\u0637\u0652\u0631\u064f \u0627\u0644\u0652\u0625\u0650\u064a\u0645\u064e\u0627\u0646\u0650\n\n\u201cPurity is half of faith.\u201d\n\u2014 Sahih Muslim 223\n\nHow will you live this today?\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#hadith #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/DfmDssftfPk/"}, {"id": "18085944884350633", "date": "2026-11-10", "time": "12:30", "datetime": "2026-11-10 12:30", "day": "Tuesday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 4, "comments": 0, "caption": "Good Deed of the Day \u2705\n\nClear the path: Pick up litter or move something harmful out of people\u2019s way.\n\nWhy it matters: Removing harm from the road is a branch of faith. (Sahih Muslim 35)\n\nComment \u2705 when you have done it, and share it with a friend.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#gooddeeds #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/Dfg8xdtNjCM/"}, {"id": "18118786858825226", "date": "2026-11-10", "time": "08:30", "datetime": "2026-11-10 08:30", "day": "Tuesday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 4, "comments": 0, "caption": "Dua of the Day\nBest for: Before a hard task\n\n\u0631\u064e\u0628\u0650\u0651 \u0627\u0634\u0652\u0631\u064e\u062d\u0652 \u0644\u0650\u064a \u0635\u064e\u062f\u0652\u0631\u0650\u064a \u0648\u064e\u064a\u064e\u0633\u0650\u0651\u0631\u0652 \u0644\u0650\u064a \u0623\u064e\u0645\u0652\u0631\u0650\u064a\n\nMy Lord, expand my chest for me and make my task easy for me.\n\u2014 Qur\u2019an 20:25\u201326\n\nSend this to someone you love.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#dua #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/Dfg81qQtY9W/"}, {"id": "18054379001824483", "date": "2026-11-10", "time": "07:00", "datetime": "2026-11-10 07:00", "day": "Tuesday", "slot": "Morning (7 AM)", "type": "Hadith", "likes": 5, "comments": 0, "caption": "Hadith of the Day\n\n\u0645\u064e\u0646\u0652 \u0643\u064e\u0627\u0646\u064e \u064a\u064f\u0624\u0652\u0645\u0650\u0646\u064f \u0628\u0650\u0627\u0644\u0644\u064e\u0651\u0647\u0650 \u0648\u064e\u0627\u0644\u0652\u064a\u064e\u0648\u0652\u0645\u0650 \u0627\u0644\u0652\u0622\u062e\u0650\u0631\u0650 \u0641\u064e\u0644\u0652\u064a\u064e\u0642\u064f\u0644\u0652 \u062e\u064e\u064a\u0652\u0631\u064b\u0627 \u0623\u064e\u0648\u0652 \u0644\u0650\u064a\u064e\u0635\u0652\u0645\u064f\u062a\u0652\n\n\u201cWhoever believes in Allah and the Last Day, let him speak good or remain silent.\u201d\n\u2014 Sahih al-Bukhari 6018 \u00b7 Sahih Muslim 47\n\nShare it with someone who needs it.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#hadith #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/Dfg8pN8NDeM/"}, {"id": "18122528332939861", "date": "2026-11-09", "time": "14:30", "datetime": "2026-11-09 14:30", "day": "Monday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "Dua of the Day\nBest for: Before studying\n\n\u0631\u064e\u0628\u0650\u0651 \u0632\u0650\u062f\u0652\u0646\u0650\u064a \u0639\u0650\u0644\u0652\u0645\u064b\u0627\n\nMy Lord, increase me in knowledge.\n\u2014 Qur\u2019an 20:114\n\nSave this to recite later.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#dua #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya", "permalink": "https://www.instagram.com/p/Dfg7j_zNE2t/"}, {"id": "17999308278030511", "date": "2026-11-09", "time": "13:30", "datetime": "2026-11-09 13:30", "day": "Monday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 4, "comments": 0, "caption": "Good Deed of the Day \u2705\n\nCall your parents: Call or visit your parents just to check in. No agenda, just love.\n\nWhy it matters: \u201cAnd lower to them the wing of humility out of mercy.\u201d (Qur\u2019an 17:24)\n\nComment \u2705 when you have done it, and share it with a friend.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#gooddeeds #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya", "permalink": "https://www.instagram.com/p/Dfg7flFtlVA/"}, {"id": "18116791856521266", "date": "2026-11-09", "time": "11:43", "datetime": "2026-11-09 11:43", "day": "Monday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 6, "comments": 0, "caption": "Hadith of the Day\n\n\u0644\u064e\u0627 \u064a\u064f\u0624\u0652\u0645\u0650\u0646\u064f \u0623\u064e\u062d\u064e\u062f\u064f\u0643\u064f\u0645\u0652 \u062d\u064e\u062a\u064e\u0651\u0649 \u064a\u064f\u062d\u0650\u0628\u064e\u0651 \u0644\u0650\u0623\u064e\u062e\u0650\u064a\u0647\u0650 \u0645\u064e\u0627 \u064a\u064f\u062d\u0650\u0628\u064f\u0651 \u0644\u0650\u0646\u064e\u0641\u0652\u0633\u0650\u0647\u0650\n\n\u201cNone of you truly believes until he loves for his brother what he loves for himself.\u201d\n\u2014 Sahih al-Bukhari 13 \u00b7 Sahih Muslim 45\n\nSave this and read it again tonight.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#hadith #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/Dfg7FRotfdJ/"}, {"id": "18179446255452224", "date": "2026-11-08", "time": "14:30", "datetime": "2026-11-08 14:30", "day": "Sunday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 3, "comments": 0, "caption": "\u201cDua of the Day\nBest for: Anytime\n\n\u0631\u064e\u0628\u064e\u0651\u0646\u064e\u0627 \u0622\u062a\u0650\u0646\u064e\u0627 \u0641\u0650\u064a \u0627\u0644\u062f\u064f\u0651\u0646\u0652\u064a\u064e\u0627 \u062d\u064e\u0633\u064e\u0646\u064e\u0629\u064b \u0648\u064e\u0641\u0650\u064a \u0627\u0644\u0652\u0622\u062e\u0650\u0631\u064e\u0629\u0650 \u062d\u064e\u0633\u064e\u0646\u064e\u0629\u064b \u0648\u064e\u0642\u0650\u0646\u064e\u0627 \u0639\u064e\u0630\u064e\u0627\u0628\u064e \u0627\u0644\u0646\u064e\u0651\u0627\u0631\u0650\n\nOur Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.\n\u2014 Qur\u2019an 2:201\n\nWrite Ameen below \ud83e\udd32\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#dua #duaoftheday #dua_reminder #quran #islamicquotes muslim dhikr hidaya\u201d", "permalink": "https://www.instagram.com/p/DfeTgOpNAMu/"}, {"id": "18123416128967543", "date": "2026-11-08", "time": "12:45", "datetime": "2026-11-08 12:45", "day": "Sunday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 4, "comments": 0, "caption": "\u201cGood Deed of the Day \u2705\n\nSmile first: Greet everyone you meet today with a warm, sincere smile.\n\nWhy it matters: \u201cYour smile in the face of your brother is charity.\u201d (Tirmidhi 1956)\n\nComment \u2705 when you have done it, and share it with a friend.\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#gooddeeds #sadaqah #dailyreminder #sunnah #muslimlife islamicreminder ummah hidaya\u201d", "permalink": "https://www.instagram.com/p/DfeTZ3qNagF/"}, {"id": "18201174847383345", "date": "2026-11-08", "time": "11:13", "datetime": "2026-11-08 11:13", "day": "Sunday", "slot": "Afternoon (12:30 PM)", "type": "Hadith", "likes": 4, "comments": 0, "caption": "Hadith of the Day\n\n\u0625\u0650\u0646\u064e\u0651\u0645\u064e\u0627 \u0627\u0644\u0652\u0623\u064e\u0639\u0652\u0645\u064e\u0627\u0644\u064f \u0628\u0650\u0627\u0644\u0646\u0650\u0651\u064a\u064e\u0651\u0627\u062a\u0650\n\n\u201cActions are judged only by their intentions.\u201d\n\u2014 Sahih al-Bukhari 1 \u00b7 Sahih Muslim 1907\n\nWhich part of this speaks to you today?\n\n\ud83d\udcf2 Search \u201cHidaya: Quran, Hadith & AI\u201d on the App Store & Google Play \u00b7 Link in bio\n\n#hadith #hadithoftheday #sunnah #islamicreminders #prophetmuhammad muslim deen hidaya", "permalink": "https://www.instagram.com/p/DfeTSSKN55o/"}], "last_updated": "2026-11-23 13:03:26 KSA"};
+    const account = rawData.account;
+    const posts = rawData.posts;
+
+    // Header population
+    document.getElementById("acc-pic").src = account.profile_picture_url || "";
+    document.getElementById("acc-name").innerText = account.name || "";
+    document.getElementById("acc-user").innerText = account.username || "";
+    document.getElementById("last-updated").innerText = rawData.last_updated || "";
+    document.getElementById("ig-link").href = "https://www.instagram.com/" + account.username;
+    document.getElementById("acc-followers").innerText = Number(account.followers_count || 0).toLocaleString();
+    document.getElementById("acc-media").innerText = account.media_count || 0;
+
+    // KPI
+    const totalLikes = posts.reduce((sum, p) => sum + (p.likes || 0), 0);
+    const avgLikes = posts.length > 0 ? (totalLikes / posts.length).toFixed(1) : 0;
+    document.getElementById("kpi-total-likes").innerText = totalLikes.toLocaleString();
+    document.getElementById("kpi-avg-likes").innerText = avgLikes;
+
+    // Daily Chart
+    const dailyMap = {};
+    posts.forEach(p => {
+      const d = p.date;
+      if (!dailyMap[d]) dailyMap[d] = { likes: 0, count: 0 };
+      dailyMap[d].likes += p.likes || 0;
+      dailyMap[d].count += 1;
+    });
+
+    const sortedDates = Object.keys(dailyMap).sort().slice(-14);
+    const dailyLikesData = sortedDates.map(d => dailyMap[d].likes);
+    const dailyPostsData = sortedDates.map(d => dailyMap[d].count);
+
+    new Chart(document.getElementById("dailyTrendChart"), {
+      type: "line",
+      data: {
+        labels: sortedDates.map(d => d.slice(5)),
+        datasets: [
+          {
+            label: "Total Likes",
+            data: dailyLikesData,
+            borderColor: "#10B981",
+            backgroundColor: "rgba(16, 185, 129, 0.12)",
+            tension: 0.35,
+            fill: true,
+            yAxisID: "y"
+          },
+          {
+            label: "Posts Count",
+            data: dailyPostsData,
+            borderColor: "#F59E0B",
+            backgroundColor: "rgba(245, 158, 11, 0.8)",
+            type: "bar",
+            borderRadius: 4,
+            barThickness: 12,
+            yAxisID: "y1"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { color: "rgba(255,255,255,0.04)" }, ticks: { color: "#94A3B8" } },
+          y: { grid: { color: "rgba(255,255,255,0.06)" }, ticks: { color: "#10B981" } },
+          y1: { position: "right", grid: { display: false }, ticks: { color: "#F59E0B", stepSize: 1 } }
+        },
+        plugins: {
+          legend: { labels: { color: "#CBD5E1", boxWidth: 12 } }
+        }
+      }
+    });
+
+    // Slot Chart
+    const slotMap = {
+      "Morning (7 AM)": { likes: 0, count: 0 },
+      "Afternoon (12:30 PM)": { likes: 0, count: 0 },
+      "Evening (8:30 PM)": { likes: 0, count: 0 }
+    };
+
+    posts.forEach(p => {
+      const hr = parseInt(p.time.split(":")[0]);
+      let slot = "Other";
+      if (hr >= 5 && hr < 11) slot = "Morning (7 AM)";
+      else if (hr >= 11 && hr < 16) slot = "Afternoon (12:30 PM)";
+      else if (hr >= 18 && hr < 23) slot = "Evening (8:30 PM)";
+      
+      if (slotMap[slot]) {
+        slotMap[slot].likes += p.likes || 0;
+        slotMap[slot].count += 1;
+      }
+    });
+
+    const slotLabels = Object.keys(slotMap);
+    const slotAvgLikes = slotLabels.map(s => slotMap[s].count ? (slotMap[s].likes / slotMap[s].count).toFixed(2) : 0);
+
+    new Chart(document.getElementById("slotChart"), {
+      type: "doughnut",
+      data: {
+        labels: slotLabels,
+        datasets: [{
+          data: slotAvgLikes,
+          backgroundColor: ["#38BDF8", "#F59E0B", "#10B981"],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: "bottom", labels: { color: "#CBD5E1", boxWidth: 12 } }
+        }
+      }
+    });
+
+    // Day of Week Chart
+    const dowMap = {
+      "Monday": { likes: 0, count: 0 },
+      "Tuesday": { likes: 0, count: 0 },
+      "Wednesday": { likes: 0, count: 0 },
+      "Thursday": { likes: 0, count: 0 },
+      "Friday": { likes: 0, count: 0 },
+      "Saturday": { likes: 0, count: 0 },
+      "Sunday": { likes: 0, count: 0 }
+    };
+
+    posts.forEach(p => {
+      if (dowMap[p.day]) {
+        dowMap[p.day].likes += p.likes || 0;
+        dowMap[p.day].count += 1;
+      }
+    });
+
+    const dowLabels = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const dowAvgs = dowLabels.map(d => dowMap[d].count ? (dowMap[d].likes / dowMap[d].count).toFixed(2) : 0);
+
+    new Chart(document.getElementById("dowChart"), {
+      type: "bar",
+      data: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        datasets: [{
+          label: "Avg Likes / Post",
+          data: dowAvgs,
+          backgroundColor: dowAvgs.map(v => v >= 3.0 ? "#10B981" : "#334155"),
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { grid: { display: false }, ticks: { color: "#94A3B8" } },
+          y: { grid: { color: "rgba(255,255,255,0.06)" }, ticks: { color: "#94A3B8" } }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+
+    // Table Rendering
+    function renderTable(filter = "All") {
+      const tbody = document.getElementById("postsTableBody");
+      tbody.innerHTML = "";
+      const filtered = filter === "All" ? posts : posts.filter(p => p.type === filter);
+
+      filtered.forEach(p => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-800/40 transition-colors";
+        
+        const typeBadge = p.type === "Hadith" 
+          ? `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30">Hadith</span>`
+          : (p.type === "Dua" 
+            ? `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-teal-500/10 text-teal-300 border border-teal-500/30">Dua</span>`
+            : `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Good Deed</span>`);
+
+        tr.innerHTML = `
+          <td class="py-3 px-3 font-medium text-slate-200">${p.datetime} <span class="text-[10px] text-slate-500">(${p.day.slice(0,3)})</span></td>
+          <td class="py-3 px-3">${typeBadge}</td>
+          <td class="py-3 px-3 max-w-xs truncate text-slate-300" title="${p.caption.replace(/"/g, "&quot;")}">${p.caption}</td>
+          <td class="py-3 px-3 text-slate-400">${p.slot}</td>
+          <td class="py-3 px-3 text-center font-bold text-emerald-400">${p.likes}</td>
+          <td class="py-3 px-3 text-center text-slate-400">${p.comments}</td>
+          <td class="py-3 px-3 text-right">
+            ${p.permalink ? `<a href="${p.permalink}" target="_blank" class="text-xs text-emerald-400 hover:text-emerald-300 underline font-medium">View Post ↗</a>` : "-"}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    renderTable();
+    document.getElementById("typeFilter").addEventListener("change", (e) => renderTable(e.target.value));
+  </script>
+</body>
+</html>
