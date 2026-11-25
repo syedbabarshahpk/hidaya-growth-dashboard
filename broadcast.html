@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidaya Push Broadcaster · Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDzdgBkNBrpEsQvVpdsv10Liwro0PmiTnw",
+      authDomain: "hidayatheapp-e3f68.firebaseapp.com",
+      projectId: "hidayatheapp-e3f68",
+      storageBucket: "hidayatheapp-e3f68.firebasestorage.app",
+      messagingSenderId: "568079200098",
+      appId: "1:568079200098:web:5fbf2254957aa4858ec63b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    window.db = db;
+    window.collection = collection;
+    window.getDocs = getDocs;
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: "Plus Jakarta Sans", sans-serif; background: #08110F; color: #F1F5F9; }
+    .glass-card { background: rgba(14, 27, 24, 0.85); border: 1px solid rgba(22, 101, 74, 0.35); backdrop-filter: blur(16px); border-radius: 20px; }
+    .btn-gradient { background: linear-gradient(135deg, #059669 0%, #0D9488 100%); transition: all 0.2s ease; }
+    .btn-gradient:hover { background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%); transform: translateY(-1px); }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+  <!-- 1. LOGIN MODAL -->
+  <div id="login-modal" class="w-full max-w-md p-8 glass-card shadow-2xl relative">
+    <div class="text-center mb-6">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-2xl mb-3">
+        🔒
+      </div>
+      <h2 class="text-2xl font-bold text-white tracking-tight">Hidaya Admin</h2>
+      <p class="text-xs text-slate-400 mt-1">Enter your admin credentials to access the push broadcast portal</p>
+    </div>
+
+    <form id="login-form" class="space-y-4">
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Username</label>
+        <input type="text" id="username" required autocomplete="username" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+      </div>
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Password</label>
+        <input type="password" id="password" required autocomplete="current-password" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+      </div>
+      <p id="login-error" class="text-xs text-rose-400 hidden">Invalid username or password. Please try again.</p>
+      <button type="submit" class="w-full py-3 btn-gradient text-white text-sm font-bold rounded-xl shadow-lg mt-2">
+        Unlock Dashboard
+      </button>
+    </form>
+  </div>
+
+  <!-- 2. BROADCASTER PORTAL (Hidden until authenticated) -->
+  <div id="portal" class="w-full max-w-3xl glass-card p-6 md:p-8 shadow-2xl space-y-6 hidden">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-slate-800 pb-5">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-2xl">
+          📢
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-white tracking-tight">Push Notification Broadcaster</h1>
+          <p class="text-xs text-emerald-400">Authenticated Admin Session · Hidaya App</p>
+        </div>
+      </div>
+      <button id="logout-btn" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-semibold border border-slate-700 transition-colors">
+        Logout
+      </button>
+    </div>
+
+    <!-- Audience Counter -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+        <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Registered Devices</p>
+        <div class="flex items-baseline gap-2 mt-1">
+          <h3 id="token-count" class="text-2xl font-bold text-white">Loading...</h3>
+          <span class="text-xs text-emerald-400">active</span>
+        </div>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+        <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Delivery Engine</p>
+        <h3 class="text-sm font-bold text-emerald-400 mt-2">Expo Push Cloud</h3>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+        <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Cost per Blast</p>
+        <h3 class="text-sm font-bold text-amber-300 mt-2">$0.00 (Unlimited Free)</h3>
+      </div>
+    </div>
+
+    <!-- Broadcast Composer Form -->
+    <form id="broadcast-form" class="space-y-4">
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+          Notification Title <span class="text-slate-500 font-normal">(Keep it short &amp; catchy)</span>
+        </label>
+        <input type="text" id="notif-title" required placeholder="e.g. 🌙 Ramadan Countdown: 70 Days to Go" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">
+          Message Body
+        </label>
+        <textarea id="notif-body" required rows="4" placeholder="e.g. Tap to recite today's special Dua for forgiveness and explore new Hadith reflections in Hidaya." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+      </div>
+
+      <!-- Live Mobile Phone Preview -->
+      <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80">
+        <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Device Lock Screen Preview</p>
+        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-700/60 shadow-lg flex items-start gap-3">
+          <div class="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold text-xs shrink-0 shadow">
+            🌿
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-white tracking-wide">HIDAYA</span>
+              <span class="text-[10px] text-slate-500">now</span>
+            </div>
+            <p id="preview-title" class="text-xs font-semibold text-slate-200 mt-0.5 truncate">Notification Title</p>
+            <p id="preview-body" class="text-xs text-slate-400 mt-0.5 line-clamp-2">Message body preview will appear here...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="pt-2">
+        <button type="submit" id="send-btn" class="w-full py-3.5 btn-gradient text-white text-sm font-bold rounded-xl shadow-xl flex items-center justify-center gap-2">
+          <span>🚀 Send Push Notification to All Users</span>
+        </button>
+      </div>
+    </form>
+
+    <!-- Status Output -->
+    <div id="status-box" class="p-4 rounded-xl text-xs hidden"></div>
+  </div>
+
+  <script>
+    // SHA-256 helper for client-side password verification
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    // Default credentials:
+    // Username: admin
+    // Password hash for: HidayaAdmin2026!
+    const AUTH_USER = "admin";
+    const AUTH_HASH = "ca51cb207908b8e05f63567a42b10aefae44b6b19a16f6b59523fc66aa8b4cbe"; // SHA-256 of "HidayaAdmin2026!"
+
+    const loginModal = document.getElementById("login-modal");
+    const portal = document.getElementById("portal");
+    const loginForm = document.getElementById("login-form");
+    const loginError = document.getElementById("login-error");
+
+    // Check if session exists in sessionStorage
+    if (sessionStorage.getItem("hidaya_admin_auth") === "true") {
+      showPortal();
+    }
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const u = document.getElementById("username").value.trim();
+      const p = document.getElementById("password").value;
+      const hash = await sha256(p);
+
+      if (u === AUTH_USER && hash === AUTH_HASH) {
+        sessionStorage.setItem("hidaya_admin_auth", "true");
+        loginError.classList.add("hidden");
+        showPortal();
+      } else {
+        loginError.classList.remove("hidden");
+      }
+    });
+
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      sessionStorage.removeItem("hidaya_admin_auth");
+      portal.classList.add("hidden");
+      loginModal.classList.remove("hidden");
+      document.getElementById("password").value = "";
+    });
+
+    let cachedTokens = [];
+
+    async function showPortal() {
+      loginModal.classList.add("hidden");
+      portal.classList.remove("hidden");
+      await loadTokens();
+    }
+
+    async function loadTokens() {
+      const counterEl = document.getElementById("token-count");
+      try {
+        if (!window.db) {
+          setTimeout(loadTokens, 500);
+          return;
+        }
+        const snapshot = await window.getDocs(window.collection(window.db, "push_tokens"));
+        cachedTokens = [];
+        snapshot.forEach(doc => {
+          const d = doc.data();
+          if (d.token && d.token.startsWith("ExponentPushToken")) {
+            cachedTokens.push(d.token);
+          }
+        });
+        counterEl.innerText = cachedTokens.length + " devices";
+      } catch (err) {
+        console.error("Error loading tokens:", err);
+        counterEl.innerText = "Ready (Auto)";
+      }
+    }
+
+    // Live Preview Binding
+    const titleInput = document.getElementById("notif-title");
+    const bodyInput = document.getElementById("notif-body");
+    const previewTitle = document.getElementById("preview-title");
+    const previewBody = document.getElementById("preview-body");
+
+    titleInput.addEventListener("input", (e) => {
+      previewTitle.innerText = e.target.value || "Notification Title";
+    });
+    bodyInput.addEventListener("input", (e) => {
+      previewBody.innerText = e.target.value || "Message body preview will appear here...";
+    });
+
+    // Form Submit -> Send to Expo Push API
+    document.getElementById("broadcast-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = titleInput.value.trim();
+      const body = bodyInput.value.trim();
+      const sendBtn = document.getElementById("send-btn");
+      const statusBox = document.getElementById("status-box");
+
+      if (!confirm(`Are you sure you want to broadcast this push notification to all active devices?\n\nTitle: "${title}"`)) {
+        return;
+      }
+
+      sendBtn.disabled = true;
+      sendBtn.innerHTML = "⏳ Broadcasting to devices...";
+      statusBox.classList.add("hidden");
+
+      try {
+        await loadTokens();
+
+        if (cachedTokens.length === 0) {
+          statusBox.className = "p-4 rounded-xl text-xs bg-amber-500/10 border border-amber-500/30 text-amber-300 block";
+          statusBox.innerHTML = "⚠️ <strong>No physical devices registered yet.</strong> As soon as users open the updated app build on iOS/Android, their device tokens will appear here automatically.";
+          sendBtn.disabled = false;
+          sendBtn.innerHTML = "🚀 Send Push Notification to All Users";
+          return;
+        }
+
+        // Prepare messages for Expo
+        const messages = cachedTokens.map(token => ({
+          to: token,
+          sound: "default",
+          title: title,
+          body: body,
+          data: { type: "broadcast", sentAt: Date.now() },
+          priority: "high",
+          channelId: "default"
+        }));
+
+        // Send in batches of 100 to Expo API
+        let successCount = 0;
+        const chunkSize = 100;
+        for (let i = 0; i < messages.length; i += chunkSize) {
+          const chunk = messages.slice(i, i + chunkSize);
+          const response = await fetch("https://exp.host/--/api/v2/push/send", {
+            method: "POST",
+            headers: {
+              "Accept": "application/json",
+              "Accept-Encoding": "gzip, deflate",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(chunk)
+          });
+          const resJson = await response.json();
+          if (resJson && resJson.data) {
+            successCount += resJson.data.filter(r => r.status === "ok").length;
+          }
+        }
+
+        statusBox.className = "p-4 rounded-xl text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 block";
+        statusBox.innerHTML = `✅ <strong>Broadcast Delivered!</strong> Sent successfully to ${messages.length} device(s).`;
+        titleInput.value = "";
+        bodyInput.value = "";
+        previewTitle.innerText = "Notification Title";
+        previewBody.innerText = "Message body preview will appear here...";
+      } catch (err) {
+        statusBox.className = "p-4 rounded-xl text-xs bg-rose-500/10 border border-rose-500/30 text-rose-300 block";
+        statusBox.innerHTML = `❌ <strong>Error broadcasting:</strong> ${err.message}`;
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = "🚀 Send Push Notification to All Users";
+      }
+    });
+  </script>
+</body>
+</html>
