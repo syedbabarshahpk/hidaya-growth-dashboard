@@ -19,162 +19,234 @@
       background: linear-gradient(145deg, #0B1D3A 0%, #0D4A45 55%, #1F8A7A 100%);
     }
     .card-shadow {
-      box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 gap-8">
 
-  <!-- Mobile Phone Mockup -->
-  <div class="w-full max-w-sm rounded-[44px] overflow-hidden border-[7px] border-slate-800 shadow-2xl relative text-white hidaya-bg min-h-[780px] flex flex-col justify-between">
-    
-    <!-- Top Notch & App Bar -->
-    <div class="px-5 pt-7 pb-3 flex flex-col gap-3">
-      <!-- Header Row -->
-      <div class="flex items-center justify-between">
-        <button class="w-9 h-9 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white border border-white/10 hover:bg-white/20 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-        </button>
+  <div class="text-center text-white max-w-md">
+    <h1 class="text-2xl font-black tracking-tight text-emerald-400">Hidaya Quran Reader Experience</h1>
+    <p class="text-xs text-white/70 mt-1">Clean, distraction-free card reading with audio & continue bookmarks</p>
+  </div>
 
-        <!-- Stats Pill (Hasanat + Timer + Streak) -->
-        <div class="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-black/25 backdrop-blur border border-white/10 text-[11px] font-semibold">
-          <span class="flex items-center gap-1 text-rose-300">
-            <span>💖</span> <span id="hasanat-val">1.2K</span>
-          </span>
-          <span class="text-white/30">|</span>
-          <span class="flex items-center gap-1 text-emerald-300">
-            <span>📖</span> <span>1/5</span>
-          </span>
-          <span class="text-white/30">|</span>
-          <span class="flex items-center gap-1 text-amber-200">
-            <span>⏱️</span> <span>01:45</span>
-          </span>
-        </div>
+  <div class="flex flex-wrap items-start justify-center gap-8">
 
-        <button class="w-9 h-9 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white border border-white/10 hover:bg-white/20 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        </button>
-      </div>
-
-      <!-- Daily Goal Banner Card (Themed) -->
-      <div class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-teal-900/60 to-slate-900/70 border border-emerald-500/20 backdrop-blur flex items-center justify-between">
-        <div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider">Daily Reading Goal</span>
-            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">Lvl 1</span>
-          </div>
-          <p class="text-xs text-white/80 mt-0.5">Verses today: <strong class="text-white">1 / 5</strong></p>
-        </div>
-        <!-- Progress Ring / Percentage -->
-        <div class="text-right">
-          <div class="text-sm font-extrabold text-emerald-400">20%</div>
-          <div class="w-16 h-1.5 rounded-full bg-white/10 overflow-hidden mt-1">
-            <div class="w-1/5 h-full bg-emerald-400 rounded-full"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sub header: Juz info -->
-      <div class="flex items-center justify-between text-[11px] text-white/60 px-1 font-medium">
-        <span>Juz 6 • 101 Verses left</span>
-        <span>4. An-Nisa (157 / 176)</span>
-      </div>
-    </div>
-
-    <!-- Main Content Area: Focused White Ayah Card -->
-    <div class="px-5 py-1 flex-1 flex flex-col justify-center">
-      
-      <!-- FOCUSED AYAH CARD (White Card from Screenshot, Styled with Hidaya Accents) -->
-      <div class="bg-white rounded-3xl p-5 card-shadow text-slate-800 flex flex-col justify-between">
+    <!-- SCREEN 1: THE AYAH CARD READER -->
+    <div class="flex flex-col items-center gap-2">
+      <span class="text-xs font-bold text-white/60 uppercase tracking-widest">1. Ayah Reader View</span>
+      <div class="w-full max-w-[360px] rounded-[44px] overflow-hidden border-[7px] border-slate-800 shadow-2xl relative text-white hidaya-bg min-h-[740px] flex flex-col justify-between">
         
-        <!-- Card Top Bar: Audio & Repeats + Surah info + Bookmarks -->
-        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <!-- Audio Play + Repeat Selector -->
-          <div class="flex items-center gap-1.5">
-            <button class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-md hover:bg-emerald-700 transition">
-              <svg class="w-3.5 h-3.5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-            <button class="flex items-center gap-0.5 px-2 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 text-[10px] font-bold transition">
-              <span>🔁</span> <span>1x</span>
-            </button>
-          </div>
-
-          <!-- Surah & Verse Badge -->
-          <div class="text-center">
-            <p class="text-xs font-bold text-slate-900 tracking-tight">4. An-Nisa</p>
-            <p class="text-[10px] font-semibold text-slate-400">Verse 157</p>
-          </div>
-
-          <!-- Actions: Like / Bookmark -->
-          <div class="flex items-center gap-1">
-            <button class="p-1.5 rounded-full hover:bg-slate-100 text-rose-500 transition">
-              <svg class="w-4 h-4 fill-rose-500" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-            </button>
-            <button class="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Arabic Uthmani Text -->
-        <div class="py-5 text-right leading-loose arabic-font text-2xl font-bold text-slate-900" dir="rtl">
-          وَقَوْلِهِمْ إِنَّا قَتَلْنَا ٱلْمَسِيحَ عِيسَى ٱبْنَ مَرْيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَـٰكِن شُبِّهَ لَهُمْ ۚ
-        </div>
-
-        <!-- Card Bottom Micro Toolbar (Share + Tafseer) -->
-        <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-slate-400">
-          <button class="w-7 h-7 rounded-full bg-slate-50 flex items-center justify-center hover:bg-slate-100 text-slate-600 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+        <!-- Top App Bar -->
+        <div class="px-5 pt-7 pb-3 flex items-center justify-between">
+          <button class="w-9 h-9 rounded-full bg-white/10 backdrop-blur flex items-center justify-center text-white border border-white/10 hover:bg-white/20 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           </button>
-          <div class="flex items-center gap-2">
-            <button class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-[11px] font-semibold flex items-center gap-1 hover:bg-emerald-100 transition">
-              <span>📖</span> Tafseer
+
+          <!-- Current Surah Badge -->
+          <div class="text-center">
+            <h2 class="text-sm font-bold text-white tracking-wide">4. An-Nisa</h2>
+            <p class="text-[11px] font-medium text-emerald-300">Verse 157 of 176</p>
+          </div>
+
+          <!-- Tafseer Button -->
+          <button class="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/10 text-xs font-semibold text-white flex items-center gap-1 hover:bg-white/20 transition">
+            <span>📖</span> Tafseer
+          </button>
+        </div>
+
+        <!-- Main Content Area: Focused White Ayah Card -->
+        <div class="px-5 py-2 flex-1 flex flex-col justify-center">
+          
+          <!-- FOCUSED AYAH CARD (Clean white with Favourite & Play Audio) -->
+          <div class="bg-white rounded-3xl p-5 card-shadow text-slate-800 flex flex-col justify-between">
+            
+            <!-- Card Top Bar: Audio Play & Favorite Heart -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <!-- Audio Play Button -->
+              <button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-600 text-white shadow-md hover:bg-emerald-700 active:scale-95 transition">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <span class="text-[11px] font-bold">Play Recitation</span>
+              </button>
+
+              <!-- Actions: Favorite Heart + Share Ayah Image -->
+              <div class="flex items-center gap-1">
+                <!-- Favorite Heart Button -->
+                <button class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center hover:bg-rose-50 text-rose-500 transition active:scale-90" title="Add to Favourites">
+                  <svg class="w-4 h-4 fill-rose-500" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </button>
+
+                <!-- Share Image Button -->
+                <button onclick="document.getElementById('share-modal-demo').classList.remove('hidden')" class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center hover:bg-slate-100 text-slate-700 transition active:scale-90" title="Share Ayah Image">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Arabic Uthmani Text -->
+            <div class="py-6 text-right leading-loose arabic-font text-2xl font-bold text-slate-900" dir="rtl">
+              وَقَوْلِهِمْ إِنَّا قَتَلْنَا ٱلْمَسِيحَ عِيسَى ٱبْنَ مَرْيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَـٰكِن شُبِّهَ لَهُمْ ۚ
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-medium">
+              <span>Reciter: Mishari Rashid al-Afasy</span>
+              <span>Ayah 157</span>
+            </div>
+          </div>
+
+          <!-- Transliteration (Below Card) -->
+          <div class="mt-4 px-2">
+            <p class="text-xs text-emerald-100/90 leading-relaxed font-medium">
+              Waqawlihim inna qatalna almaseeha AAeesa ibna maryama rasoola Allahi wama qataloohu wama salaboohu walakin shubbiha lahum...
+            </p>
+          </div>
+
+          <!-- English Translation (Below Card) -->
+          <div class="mt-3 px-2">
+            <p class="text-xs text-white/80 leading-relaxed font-normal">
+              And for their saying: “We killed the Messiah, Jesus son of Mary, the Messenger of Allah.” But they killed him not, nor did they crucify him, but it appeared so to them...
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Bottom Action Dock (Prev, I'm Done, Next) -->
+        <div class="p-5 pt-3">
+          <div class="flex items-center gap-3">
+            <!-- Previous Button -->
+            <button class="w-14 h-12 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition active:scale-95">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+
+            <!-- Center Finish / Session Complete Button -->
+            <button class="flex-1 h-12 rounded-2xl bg-black/40 hover:bg-black/60 border border-white/10 text-white font-bold text-xs tracking-wider uppercase transition active:scale-95 flex items-center justify-center gap-1.5">
+              <span>✓</span> I'm Done
+            </button>
+
+            <!-- Next Button (Active Highlight) -->
+            <button class="w-20 h-12 rounded-2xl bg-white text-slate-900 hover:bg-slate-100 font-extrabold flex items-center justify-center shadow-lg transition active:scale-95">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- Transliteration (Below Card) -->
-      <div class="mt-4 px-2">
-        <p class="text-xs text-emerald-100/90 leading-relaxed font-medium">
-          Waqawlihim inna qatalna almaseeha AAeesa ibna maryama rasoola Allahi wama qataloohu wama salaboohu walakin shubbiha lahum...
-        </p>
       </div>
-
-      <!-- English Translation (Below Card) -->
-      <div class="mt-3 px-2">
-        <p class="text-xs text-white/80 leading-relaxed font-normal">
-          And for their saying: “We killed the Messiah, Jesus son of Mary, the Messenger of Allah.” But they killed him not, nor did they crucify him, but it appeared so to them...
-        </p>
-      </div>
-
     </div>
 
-    <!-- Bottom Action Dock (Prev, I'm Done, Next) -->
-    <div class="p-5 pt-2">
-      <!-- Reward Tag -->
-      <div class="text-right mb-2 pr-1">
-        <span class="text-[11px] font-extrabold text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-          +1,280 Hasanat
-        </span>
+
+    <!-- SCREEN 2: HOW IT INTEGRATES WITH QURAN SCREEN ("Continue from...") -->
+    <div class="flex flex-col items-center gap-2">
+      <span class="text-xs font-bold text-white/60 uppercase tracking-widest">2. Quran Screen with "Continue from..."</span>
+      <div class="w-full max-w-[360px] rounded-[44px] overflow-hidden border-[7px] border-slate-800 shadow-2xl relative text-white hidaya-bg min-h-[740px] flex flex-col p-5">
+        
+        <!-- Header -->
+        <div class="pt-2 pb-4 flex items-center justify-between border-b border-white/10">
+          <div>
+            <h2 class="text-xl font-black text-white">Holy Quran</h2>
+            <p class="text-xs text-white/60">Recite, Reflect & Listen</p>
+          </div>
+          <div class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-emerald-300">
+            📖
+          </div>
+        </div>
+
+        <!-- CONTINUE READING HERO CARD (Saved when user taps "I'm Done") -->
+        <div class="mt-4 p-4 rounded-3xl bg-white/10 backdrop-blur-md border border-emerald-400/30 shadow-xl relative overflow-hidden">
+          <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none"></div>
+          
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-extrabold text-emerald-300 uppercase tracking-widest flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Continue Reading
+            </span>
+            <span class="text-[10px] text-white/60">Juz 6</span>
+          </div>
+
+          <div class="flex items-center justify-between my-2">
+            <div>
+              <p class="text-lg font-black text-white">Surah An-Nisa</p>
+              <p class="text-xs text-white/70">Stopped at <strong class="text-emerald-300">Verse 157</strong></p>
+            </div>
+            <p class="text-xl font-bold arabic-font text-white/90">سورة النساء</p>
+          </div>
+
+          <!-- Resume Button -->
+          <button class="mt-3 w-full py-3 rounded-2xl bg-white text-slate-900 font-extrabold text-xs shadow-md flex items-center justify-center gap-2 hover:bg-slate-100 transition active:scale-98">
+            <span>Resume Reading</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+        </div>
+
+        <!-- Surah List Preview Below -->
+        <div class="mt-5 flex-1">
+          <div class="flex items-center justify-between text-xs font-bold text-white/70 mb-3 px-1">
+            <span>Surahs</span>
+            <span>114 Total</span>
+          </div>
+
+          <!-- Sample Surah Item -->
+          <div class="space-y-2">
+            <div class="p-3 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-xl bg-white/10 flex items-center justify-center text-xs font-bold text-emerald-300">1</span>
+                <div>
+                  <p class="text-xs font-bold text-white">Al-Fatihah</p>
+                  <p class="text-[10px] text-white/50">The Opening • 7 Verses</p>
+                </div>
+              </div>
+              <span class="arabic-font text-base text-white/80">الفاتحة</span>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-xl bg-white/10 flex items-center justify-center text-xs font-bold text-emerald-300">2</span>
+                <div>
+                  <p class="text-xs font-bold text-white">Al-Baqarah</p>
+                  <p class="text-[10px] text-white/50">The Cow • 286 Verses</p>
+                </div>
+              </div>
+              <span class="arabic-font text-base text-white/80">البقرة</span>
+            </div>
+          </div>
+        </div>
+
       </div>
+    </div>
 
-      <!-- Navigation Bar -->
-      <div class="flex items-center gap-3">
-        <!-- Previous Button -->
-        <button class="w-14 h-12 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-white transition active:scale-95">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
-        </button>
 
-        <!-- Center Finish / Session Complete Button -->
-        <button class="flex-1 h-12 rounded-2xl bg-black/40 hover:bg-black/60 border border-white/10 text-white font-bold text-xs tracking-wider uppercase transition active:scale-95">
-          I'm Done
-        </button>
+    <!-- MODAL / DESIGN 3: HOW AYAH IMAGE SHARING LOOKS (Instagram Story / WhatsApp Format) -->
+    <div class="flex flex-col items-center gap-2">
+      <span class="text-xs font-bold text-white/60 uppercase tracking-widest">3. Generated Ayah Share Image</span>
+      <!-- Exportable Social Media Card (4:5 / 9:16) -->
+      <div class="w-full max-w-[320px] rounded-[32px] overflow-hidden border border-white/10 shadow-2xl p-6 relative flex flex-col justify-between text-white" style="background: linear-gradient(145deg, #07162C 0%, #0A3C38 50%, #166D60 100%); min-height: 480px;">
+        
+        <!-- Header: Hidaya Logo & Surah Info -->
+        <div class="flex items-center justify-between border-b border-white/15 pb-4">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center text-sm font-black text-emerald-300">
+              🌿
+            </div>
+            <span class="text-xs font-extrabold tracking-wider text-white uppercase">HIDAYA</span>
+          </div>
+          <span class="text-[11px] font-semibold text-emerald-300 bg-black/20 px-2 py-0.5 rounded-full border border-white/10">Surah An-Nisa • 157</span>
+        </div>
 
-        <!-- Next Button (Active Highlight) -->
-        <button class="w-20 h-12 rounded-2xl bg-white text-slate-900 hover:bg-slate-100 font-extrabold flex items-center justify-center shadow-lg transition active:scale-95">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-        </button>
+        <!-- Arabic Calligraphy in Center -->
+        <div class="py-6 text-center">
+          <p class="arabic-font text-xl leading-loose font-bold text-amber-100" dir="rtl">
+            وَقَوْلِهِمْ إِنَّا قَتَلْنَا ٱلْمَسِيحَ عِيسَى ٱبْنَ مَرْيَمَ رَسُولَ ٱللَّهِ وَمَا قَتَلُوهُ وَمَا صَلَبُوهُ وَلَـٰكِن شُبِّهَ لَهُمْ
+          </p>
+          <div class="w-12 h-0.5 bg-emerald-400/40 mx-auto my-4 rounded-full"></div>
+          <p class="text-[11px] text-white/85 leading-relaxed italic px-2">
+            “And for their saying: We killed the Messiah, Jesus son of Mary, the Messenger of Allah. But they killed him not, nor did they crucify him...”
+          </p>
+        </div>
+
+        <!-- Footer: Branding & Download Link -->
+        <div class="pt-4 border-t border-white/15 flex items-center justify-between text-[10px] text-white/60 font-medium">
+          <span>Read on Hidaya App</span>
+          <span class="text-emerald-300 font-semibold">@hidayatheapp</span>
+        </div>
       </div>
     </div>
 
