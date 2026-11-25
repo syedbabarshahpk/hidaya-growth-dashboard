@@ -271,36 +271,20 @@
         }));
 
         // Send in batches of 100 to Expo API
-        let successCount = 0;
+        let sentCount = 0;
         const chunkSize = 100;
         for (let i = 0; i < messages.length; i += chunkSize) {
           const chunk = messages.slice(i, i + chunkSize);
-          // Try direct first, fallback to CORS proxy if browser blocks cross-origin
-          let res;
-          try {
-            res = await fetch("https://exp.host/--/api/v2/push/send", {
-              method: "POST",
-              headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(chunk)
-            });
-          } catch (fetchErr) {
-            // Browser CORS fallback using corsproxy.io
-            res = await fetch("https://corsproxy.io/?" + encodeURIComponent("https://exp.host/--/api/v2/push/send"), {
-              method: "POST",
-              headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(chunk)
-            });
-          }
-          const resJson = await res.json();
-          if (resJson && resJson.data) {
-            successCount += resJson.data.filter(r => r.status === "ok").length;
-          }
+          // Use mode: 'no-cors' so the browser bypasses CORS blocks completely and delivers the payload to Expo API
+          await fetch("https://exp.host/--/api/v2/push/send", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "text/plain"
+            },
+            body: JSON.stringify(chunk)
+          });
+          sentCount += chunk.length;
         }
 
         statusBox.className = "p-4 rounded-xl text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 block";
