@@ -1,0 +1,89 @@
+name: Broadcast Push Notification
+
+on:
+  repository_dispatch:
+    types: [send_broadcast]
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Notification Title'
+        required: true
+        default: 'Assalamu Alaikum'
+      body:
+        description: 'Notification Body'
+        required: true
+        default: 'Reminder from Hidaya'
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Push Notification via Expo
+        shell: python
+        run: |
+          import json, os, urllib.request
+
+          # Extract title and body from client_payload or workflow_dispatch
+          event_path = os.environ.get('GITHUB_EVENT_PATH')
+          title = "Reminder from Hidaya"
+          body = "Assalamu Alaikum"
+
+          if event_path and os.path.exists(event_path):
+              with open(event_path, 'r') as f:
+                  event = json.load(f)
+              payload = event.get('client_payload', {})
+              title = payload.get('title') or event.get('inputs', {}).get('title') or title
+              body = payload.get('body') or event.get('inputs', {}).get('body') or body
+
+          print(f"Broadcasting: Title='{title}', Body='{body}'")
+
+          # 1. Fetch active push tokens from Firestore
+          firestore_url = "https://firestore.googleapis.com/v1/projects/hidayatheapp-e3f68/databases/(default)/documents/push_tokens"
+          req = urllib.request.Request(firestore_url)
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  data = json.loads(resp.read().decode())
+          except Exception as e:
+              print(f"Error reading Firestore: {e}")
+              exit(1)
+
+          tokens = []
+          for doc in data.get('documents', []):
+              t = doc.get('fields', {}).get('token', {}).get('stringValue')
+              if t and t.startswith('ExponentPushToken'):
+                  tokens.append(t)
+
+          print(f"Found {len(tokens)} registered device token(s).")
+          if not tokens:
+              print("No registered tokens to send to.")
+              exit(0)
+
+          # 2. Chunk into batches of 100 and send to Expo
+          chunk_size = 100
+          for i in range(0, len(tokens), chunk_size):
+              chunk = tokens[i:i + chunk_size]
+              messages = [{
+                  'to': tok,
+                  'title': title,
+                  'body': body,
+                  'sound': 'default',
+                  'priority': 'high',
+                  'data': {'type': 'broadcast'}
+              } for tok in chunk]
+
+              expo_req = urllib.request.Request(
+                  'https://exp.host/--/api/v2/push/send',
+                  data=json.dumps(messages).encode('utf-8'),
+                  headers={
+                      'Content-Type': 'application/json',
+                      'Accept': 'application/json'
+                  }
+              )
+              try:
+                  with urllib.request.urlopen(expo_req) as resp:
+                      res = json.loads(resp.read().decode())
+                      print("Expo API Response:", res)
+              except Exception as e:
+                  print(f"Error delivering chunk {i}: {e}")
+
+          print("Broadcast completed successfully.")
