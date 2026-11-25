@@ -27,6 +27,8 @@ jobs:
           event_path = os.environ.get('GITHUB_EVENT_PATH')
           title = "Reminder from Hidaya"
           body = "Assalamu Alaikum"
+          url = ""
+          screen = ""
 
           if event_path and os.path.exists(event_path):
               with open(event_path, 'r') as f:
@@ -34,6 +36,8 @@ jobs:
               payload = event.get('client_payload', {})
               title = payload.get('title') or event.get('inputs', {}).get('title') or title
               body = payload.get('body') or event.get('inputs', {}).get('body') or body
+              url = payload.get('url') or ""
+              screen = payload.get('screen') or ""
 
           print(f"Broadcasting: Title='{title}', Body='{body}'")
 
@@ -62,13 +66,19 @@ jobs:
           chunk_size = 100
           for i in range(0, len(tokens), chunk_size):
               chunk = tokens[i:i + chunk_size]
+              data_payload = {'type': 'broadcast'}
+              if url:
+                  data_payload['url'] = url
+              if screen:
+                  data_payload['screen'] = screen
+
               messages = [{
                   'to': tok,
                   'title': title,
                   'body': body,
                   'sound': 'default',
                   'priority': 'high',
-                  'data': {'type': 'broadcast'}
+                  'data': data_payload
               } for tok in chunk]
 
               expo_req = urllib.request.Request(

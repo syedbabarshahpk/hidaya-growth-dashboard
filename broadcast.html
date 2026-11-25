@@ -114,6 +114,31 @@
         <textarea id="notif-body" required rows="4" placeholder="e.g. Tap to recite today's special Dua for forgiveness and explore new Hadith reflections in Hidaya." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
       </div>
 
+      <!-- Optional Deep Link / Hyperlink Destination -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+            🔗 Web Hyperlink <span class="text-slate-500 font-normal">(Opens in Safari/Chrome)</span>
+          </label>
+          <input type="url" id="notif-url" placeholder="https://instagram.com/hidayatheapp" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+        <div>
+          <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+            📱 In-App Screen <span class="text-slate-500 font-normal">(Tap opens specific screen)</span>
+          </label>
+          <select id="notif-screen" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="">Default (Home Screen)</option>
+            <option value="Quran">Quran Reader</option>
+            <option value="ImamBot">Idrak AI (ImamBot)</option>
+            <option value="Hadith">Hadith Collection</option>
+            <option value="Azkaar">Daily Duas & Azkaar</option>
+            <option value="Umrah">Umrah Guide</option>
+            <option value="QiblaCompass">Qibla Compass</option>
+            <option value="PlantASeed">Plant a Seed</option>
+          </select>
+        </div>
+      </div>
+
       <!-- Live Mobile Phone Preview -->
       <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80">
         <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Device Lock Screen Preview</p>
@@ -240,6 +265,8 @@
       e.preventDefault();
       const title = titleInput.value.trim();
       const body = bodyInput.value.trim();
+      const url = document.getElementById("notif-url").value.trim();
+      const screen = document.getElementById("notif-screen").value;
       const sendBtn = document.getElementById("send-btn");
       const statusBox = document.getElementById("status-box");
 
@@ -274,7 +301,9 @@
             event_type: "send_broadcast",
             client_payload: {
               title: title,
-              body: body
+              body: body,
+              url: url,
+              screen: screen
             }
           })
         });
