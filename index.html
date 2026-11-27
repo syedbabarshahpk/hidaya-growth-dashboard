@@ -721,9 +721,22 @@
             if (q.includes('country') || q.includes('countries') || q.includes('geo') || q.includes('region')) {
                 const top5 = appleData.topCountries.slice(0, 5);
                 const totalGeoUnits = appleData.topCountries.reduce((a,b) => a + b.units, 0);
+                const countryNameMap = {
+                    'PK': '🇵🇰 Pakistan',
+                    'GB': '🇬🇧 United Kingdom',
+                    'US': '🇺🇸 United States',
+                    'NG': '🇳🇬 Nigeria',
+                    'AE': '🇦🇪 UAE',
+                    'AU': '🇦🇺 Australia',
+                    'SA': '🇸🇦 Saudi Arabia',
+                    'SE': '🇸🇪 Sweden',
+                    'DE': '🇩🇪 Germany',
+                    'FR': '🇫🇷 France'
+                };
                 const items = top5.map(c => {
+                    const fullName = countryNameMap[c.country] || c.country;
                     const pct = Math.round((c.units / totalGeoUnits) * 100);
-                    return '<div class="bg-slate-950/60 p-2 rounded border border-slate-800"><span class="text-indigo-400 font-bold">' + c.country + ':</span> ' + c.units + ' units (' + pct + '%)</div>';
+                    return '<div class="bg-slate-950/60 p-2 rounded border border-slate-800"><span class="text-indigo-400 font-bold">' + fullName + ':</span> ' + c.units + ' units (' + pct + '%)</div>';
                 }).join('');
 
                 return `
@@ -999,17 +1012,33 @@
 
             // 4. Apple Geo Breakdown
             const ctxAppleGeo = document.getElementById('chart-apple-geo').getContext('2d');
+            const countryNameMap = {
+                'PK': '🇵🇰 Pakistan',
+                'GB': '🇬🇧 United Kingdom',
+                'US': '🇺🇸 United States',
+                'NG': '🇳🇬 Nigeria',
+                'AE': '🇦🇪 United Arab Emirates',
+                'AU': '🇦🇺 Australia',
+                'SA': '🇸🇦 Saudi Arabia',
+                'SE': '🇸🇪 Sweden',
+                'DE': '🇩🇪 Germany',
+                'FR': '🇫🇷 France',
+                'GH': '🇬🇭 Ghana',
+                'JP': '🇯🇵 Japan',
+                'UG': '🇺🇬 Uganda',
+                'IN': '🇮🇳 India'
+            };
             const topC = appleData.topCountries.slice(0, 6);
             new Chart(ctxAppleGeo, {
                 type: 'bar',
                 indexAxis: 'y',
                 data: {
-                    labels: topC.map(c => c.country),
+                    labels: topC.map(c => countryNameMap[c.country] || c.country),
                     datasets: [{
                         label: 'Total Units',
                         data: topC.map(c => c.units),
                         backgroundColor: 'rgba(129, 140, 248, 0.85)',
-                        borderRadius: 4
+                        borderRadius: 6
                     }]
                 },
                 options: {
