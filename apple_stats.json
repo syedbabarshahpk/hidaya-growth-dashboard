@@ -1,0 +1,251 @@
+{
+  "totalDownloads": 51,
+  "totalRedownloads": 14,
+  "totalUpdates": 123,
+  "totalUnits": 65,
+  "appStoreRating": 5,
+  "totalReviews": 1,
+  "activeVersion": "v2.0",
+  "topCountries": [
+    {
+      "country": "PK",
+      "units": 101
+    },
+    {
+      "country": "GB",
+      "units": 30
+    },
+    {
+      "country": "US",
+      "units": 17
+    },
+    {
+      "country": "NG",
+      "units": 13
+    },
+    {
+      "country": "AE",
+      "units": 6
+    },
+    {
+      "country": "AU",
+      "units": 5
+    },
+    {
+      "country": "SA",
+      "units": 4
+    },
+    {
+      "country": "SE",
+      "units": 3
+    },
+    {
+      "country": "DE",
+      "units": 2
+    },
+    {
+      "country": "FR",
+      "units": 2
+    },
+    {
+      "country": "GH",
+      "units": 2
+    },
+    {
+      "country": "JP",
+      "units": 1
+    },
+    {
+      "country": "UG",
+      "units": 1
+    },
+    {
+      "country": "IN",
+      "units": 1
+    }
+  ],
+  "monthlyStats": {
+    "2026-07": {
+      "dl": 23,
+      "re": 6,
+      "up": 35
+    },
+    "2026-08": {
+      "dl": 6,
+      "re": 1,
+      "up": 35
+    },
+    "2026-09": {
+      "dl": 8,
+      "re": 2,
+      "up": 3
+    },
+    "2026-10": {
+      "dl": 10,
+      "re": 2,
+      "up": 1
+    },
+    "2026-11": {
+      "dl": 4,
+      "re": 3,
+      "up": 49
+    }
+  },
+  "sampleRows": [
+    {
+      "Provider": "APPLE",
+      "Provider Country": "US",
+      "SKU": "hidaya-quran-hadith-ai",
+      "Developer": "Zarak Khan",
+      "Title": "Hidaya - Quran, Hadith & AI",
+      "Version": "1.0.2",
+      "Product Type Identifier": "7F",
+      "Units": "5",
+      "Developer Proceeds": "0.00",
+      "Begin Date": "07/01/2026",
+      "End Date": "07/31/2026",
+      "Customer Currency": "PKR",
+      "Country Code": "PK",
+      "Currency of Proceeds": "PKR",
+      "Apple Identifier": "6783264330",
+      "Customer Price": "0.00",
+      "Promo Code": " ",
+      "Parent Identifier": " ",
+      "Subscription": " ",
+      "Period": " ",
+      "Category": "Education",
+      "CMB": "",
+      "Device": "iPhone",
+      "Supported Platforms": "iOS",
+      "Proceeds Reason": " ",
+      "Preserved Pricing": " ",
+      "Client": " ",
+      "Order Type": " ",
+      "_period": "2026-07"
+    },
+    {
+      "Provider": "APPLE",
+      "Provider Country": "US",
+      "SKU": "hidaya-quran-hadith-ai",
+      "Developer": "Zarak Khan",
+      "Title": "Hidaya - Quran, Hadith & AI",
+      "Version": "1.0.3",
+      "Product Type Identifier": "1F",
+      "Units": "1",
+      "Developer Proceeds": "0.00",
+      "Begin Date": "07/01/2026",
+      "End Date": "07/31/2026",
+      "Customer Currency": "EUR",
+      "Country Code": "DE",
+      "Currency of Proceeds": " ",
+      "Apple Identifier": "6783264330",
+      "Customer Price": "0.00",
+      "Promo Code": " ",
+      "Parent Identifier": " ",
+      "Subscription": " ",
+      "Period": " ",
+      "Category": "Education",
+      "CMB": "",
+      "Device": "iPhone",
+      "Supported Platforms": "iOS",
+      "Proceeds Reason": " ",
+      "Preserved Pricing": " ",
+      "Client": " ",
+      "Order Type": " ",
+      "_period": "2026-07"
+    },
+    {
+      "Provider": "APPLE",
+      "Provider Country": "US",
+      "SKU": "hidaya-quran-hadith-ai",
+      "Developer": "Zarak Khan",
+      "Title": "Hidaya - Quran, Hadith & AI",
+      "Version": "1.0.4",
+      "Product Type Identifier": "7F",
+      "Units": "10",
+      "Developer Proceeds": "0.00",
+      "Begin Date": "07/01/2026",
+      "End Date": "07/31/2026",
+      "Customer Currency": "PKR",
+      "Country Code": "PK",
+      "Currency of Proceeds": "PKR",
+      "Apple Identifier": "6783264330",
+      "Customer Price": "0.00",
+      "Promo Code": " ",
+      "Parent Identifier": " ",
+      "Subscription": " ",
+      "Period": " ",
+      "Category": "Education",
+      "CMB": "",
+      "Device": "iPhone",
+      "Supported Platforms": "iOS",
+      "Proceeds Reason": " ",
+      "Preserved Pricing": " ",
+      "Client": " ",
+      "Order Type": " ",
+      "_period": "2026-07"
+    },
+    {
+      "Provider": "APPLE",
+      "Provider Country": "US",
+      "SKU": "hidaya-quran-hadith-ai",
+      "Developer": "Zarak Khan",
+      "Title": "Hidaya - Quran, Hadith & AI",
+      "Version": "1.0.2",
+      "Product Type Identifier": "1F",
+      "Units": "2",
+      "Developer Proceeds": "0.00",
+      "Begin Date": "07/01/2026",
+      "End Date": "07/31/2026",
+      "Customer Currency": "GBP",
+      "Country Code": "GB",
+      "Currency of Proceeds": " ",
+      "Apple Identifier": "6783264330",
+      "Customer Price": "0.00",
+      "Promo Code": " ",
+      "Parent Identifier": " ",
+      "Subscription": " ",
+      "Period": " ",
+      "Category": "Education",
+      "CMB": "",
+      "Device": "iPhone",
+      "Supported Platforms": "iOS",
+      "Proceeds Reason": " ",
+      "Preserved Pricing": " ",
+      "Client": " ",
+      "Order Type": " ",
+      "_period": "2026-07"
+    },
+    {
+      "Provider": "APPLE",
+      "Provider Country": "US",
+      "SKU": "hidaya-quran-hadith-ai",
+      "Developer": "Zarak Khan",
+      "Title": "Hidaya - Quran, Hadith & AI",
+      "Version": "1.0.2",
+      "Product Type Identifier": "1F",
+      "Units": "1",
+      "Developer Proceeds": "0.00",
+      "Begin Date": "07/01/2026",
+      "End Date": "07/31/2026",
+      "Customer Currency": "EUR",
+      "Country Code": "DE",
+      "Currency of Proceeds": " ",
+      "Apple Identifier": "6783264330",
+      "Customer Price": "0.00",
+      "Promo Code": " ",
+      "Parent Identifier": " ",
+      "Subscription": " ",
+      "Period": " ",
+      "Category": "Education",
+      "CMB": "",
+      "Device": "iPhone",
+      "Supported Platforms": "iOS",
+      "Proceeds Reason": " ",
+      "Preserved Pricing": " ",
+      "Client": " ",
+      "Order Type": " ",
+      "_period": "2026-07"
+    }
+  ]
+}
