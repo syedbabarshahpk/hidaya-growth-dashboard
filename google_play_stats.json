@@ -1,0 +1,35 @@
+{
+  "packageName": "com.hidayaaitheapp.app",
+  "appName": "Hidaya - Quran, Hadith and AI",
+  "releaseVersion": "Production (Nov 9, 2026)",
+  "rollout": "100%",
+  "totalInstalls": 33,
+  "installBase": "71.7%",
+  "deviceAcquisitions28d": 16,
+  "deviceFirstOpens28d": 9,
+  "monthlyActiveDevices": 22,
+  "averageRating": 5,
+  "topCountries": [
+    {
+      "country": "PK",
+      "name": "🇵🇰 Pakistan",
+      "share": "62%"
+    },
+    {
+      "country": "IN",
+      "name": "🇮🇳 India",
+      "share": "12%"
+    },
+    {
+      "country": "MY",
+      "name": "🇲🇾 Malaysia",
+      "share": "8%"
+    },
+    {
+      "country": "NG",
+      "name": "🇳🇬 Nigeria",
+      "share": "5%"
+    }
+  ],
+  "verifiedAt": "2026-11-27T23:28:34.168Z"
+}
