@@ -1,0 +1,104 @@
+name: Reply to App Store Review
+
+on:
+  repository_dispatch:
+    types: [reply_app_store_review]
+  workflow_dispatch:
+    inputs:
+      review_id:
+        description: 'Customer Review ID'
+        required: true
+      response_body:
+        description: 'Response Body'
+        required: true
+
+jobs:
+  reply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Review Response to Apple App Store Connect
+        shell: python
+        run: |
+          import json, os, time, urllib.request
+          import jwt # using PyJWT or manual ES256
+
+          event_path = os.environ.get('GITHUB_EVENT_PATH')
+          review_id = "00000194-5066-4a03-5361-f52700000000"
+          response_body = ""
+
+          if event_path and os.path.exists(event_path):
+              with open(event_path, 'r') as f:
+                  event = json.load(f)
+              payload = event.get('client_payload', {})
+              review_id = payload.get('review_id') or event.get('inputs', {}).get('review_id') or review_id
+              response_body = payload.get('response_body') or event.get('inputs', {}).get('response_body') or ""
+
+          print(f"Submitting response for Review ID: {review_id}")
+          if not response_body.strip():
+              print("Error: response_body cannot be empty")
+              exit(1)
+
+          key_id = "JHP772QF4Z"
+          issuer_id = "6fce4d46-66a1-44ea-b257-42db3f19b229"
+          private_key_str = """-----BEGIN PRIVATE KEY-----
+MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgUqLSaQP4sDxssPM6
+pOn+1nE3WrenOUideAW7hNHqdtygCgYIKoZIzj0DAQehRANCAARK8QV+dt44ShJn
+TFQd8TPZjM4o8gInRvvDb1DHE2nDxjZ/ZveCf7lTec/hAdmIjP/OZb2bMcoD3Is9
+OTIYj1QR
+-----END PRIVATE KEY-----"""
+
+          # Generate ES256 JWT using cryptography / pyjwt
+          import subprocess
+          subprocess.check_call(["python3", "-m", "pip", "install", "cryptography", "pyjwt"])
+          import jwt
+
+          now = int(time.time())
+          token = jwt.encode(
+              {
+                  "iss": issuer_id,
+                  "iat": now,
+                  "exp": now + 1200,
+                  "aud": "appstoreconnect-v1"
+              },
+              private_key_str,
+              algorithm="ES256",
+              headers={"kid": key_id}
+          )
+
+          # Prepare Apple App Store Connect API Payload
+          url = "https://api.appstoreconnect.apple.com/v1/customerReviewResponses"
+          payload_data = {
+              "data": {
+                  "type": "customerReviewResponses",
+                  "attributes": {
+                      "responseBody": response_body
+                  },
+                  "relationships": {
+                      "review": {
+                          "data": {
+                              "type": "customerReviews",
+                              "id": review_id
+                          }
+                      }
+                  }
+              }
+          }
+
+          req = urllib.request.Request(
+              url,
+              data=json.dumps(payload_data).encode('utf-8'),
+              headers={
+                  "Authorization": f"Bearer {token}",
+                  "Content-Type": "application/json"
+              },
+              method="POST"
+          )
+
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  res_data = resp.read().decode('utf-8')
+                  print(f"Success ({resp.status}): {res_data}")
+          except urllib.error.HTTPError as e:
+              err_content = e.read().decode('utf-8')
+              print(f"HTTPError {e.code}: {err_content}")
+              exit(1)
