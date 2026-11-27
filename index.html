@@ -65,6 +65,52 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: rgba(99, 102, 241, 0.6);
         }
+    
+        /* Minimalist Info Tooltips */
+        .tooltip-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        .tooltip-box {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            background: #0F172A;
+            color: #E2E8F0;
+            font-size: 11px;
+            line-height: 1.45;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            pointer-events: none;
+            transition: opacity 0.15s ease, visibility 0.15s ease;
+            text-transform: none;
+            font-weight: 400;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-align: left;
+        }
+        .tooltip-wrap:hover .tooltip-box {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-box::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: #0F172A transparent transparent transparent;
+        }
+
     </style>
 </head>
 <body class="min-h-screen flex flex-col text-slate-100">
@@ -149,7 +195,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Followers</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Total Followers<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Total verified accounts following @hidayatheapp on Instagram as pulled live from Meta Graph API.</span></span></span>
                         <div class="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400"><i data-lucide="users" class="w-4 h-4"></i></div>
                     </div>
                     <div class="text-3xl font-extrabold text-white mt-3 font-mono">4,456</div>
@@ -160,7 +206,7 @@
 
                 <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Media Posts</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Total Media Posts<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Total published Instagram feed posts (Hadith, Du'a, and Good Deeds) currently live on your profile.</span></span></span>
                         <div class="w-9 h-9 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-400"><i data-lucide="image" class="w-4 h-4"></i></div>
                     </div>
                     <div class="text-3xl font-extrabold text-white mt-3 font-mono">60</div>
@@ -171,7 +217,7 @@
 
                 <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Avg Post Engagement</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Avg Post Engagement<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Average number of likes received per post across your entire 60-post publishing history.</span></span></span>
                         <div class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400"><i data-lucide="heart" class="w-4 h-4"></i></div>
                     </div>
                     <div class="text-3xl font-extrabold text-white mt-3 font-mono">3.8 <span class="text-lg text-slate-400 font-sans">likes/post</span></div>
@@ -183,7 +229,7 @@
 
                 <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Top Performing Slot</span>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Top Performing Slot<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">The time of day when your posts generate the highest average likes (Morning 6:30 AM after Fajr leads at 4.2 likes).</span></span></span>
                         <div class="w-9 h-9 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400"><i data-lucide="clock" class="w-4 h-4"></i></div>
                     </div>
                     <div class="text-2xl font-bold text-white mt-3">06:30 AM</div>
@@ -219,7 +265,7 @@
                     <!-- Today's Growth -->
                     <div class="bg-slate-900/70 rounded-xl p-5 border border-slate-800/90 relative overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Today's Growth</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Today's Growth<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Net new Instagram followers gained today (Nov 28) compared to yesterday. Currently holding steady at 4,456.</span></span></span>
                             <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
                                 <i data-lucide="calendar" class="w-4 h-4"></i>
                             </div>
@@ -237,7 +283,7 @@
                     <!-- Last Week's Growth -->
                     <div class="bg-slate-900/70 rounded-xl p-5 border border-slate-800/90 relative overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Past 7 Days Growth</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Past 7 Days Growth<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Verified net follower change over the last 7 days (+2 gained, from 4,454 up to 4,456).</span></span></span>
                             <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-400">
                                 <i data-lucide="trending-up" class="w-4 h-4"></i>
                             </div>
@@ -255,7 +301,7 @@
                     <!-- Total Audience -->
                     <div class="bg-slate-900/70 rounded-xl p-5 border border-slate-800/90 relative overflow-hidden">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Audience</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Total Audience<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Your exact live Instagram follower count verified directly via Meta Graph API.</span></span></span>
                             <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400">
                                 <i data-lucide="users" class="w-4 h-4"></i>
                             </div>
@@ -362,7 +408,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                     <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">First-Time Downloads</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">First-Time Downloads<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">The true number of individual people (unique Apple IDs) who downloaded Hidaya for the first time on iOS.</span></span></span>
                             <div class="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400"><i data-lucide="download" class="w-4 h-4"></i></div>
                         </div>
                         <div class="text-3xl font-extrabold text-white mt-3 font-mono">51</div>
@@ -371,7 +417,7 @@
 
                     <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Redownloads</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Redownloads<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Existing users who deleted and re-installed Hidaya, or installed it on a second Apple device using the same account.</span></span></span>
                             <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-400"><i data-lucide="refresh-cw" class="w-4 h-4"></i></div>
                         </div>
                         <div class="text-3xl font-extrabold text-white mt-3 font-mono">14</div>
@@ -380,7 +426,7 @@
 
                     <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">App Updates</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">App Updates<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Total times existing users updated their installed app whenever you released a new version on the App Store.</span></span></span>
                             <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400"><i data-lucide="arrow-up-circle" class="w-4 h-4"></i></div>
                         </div>
                         <div class="text-3xl font-extrabold text-white mt-3 font-mono">123</div>
@@ -389,7 +435,7 @@
 
                     <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Units</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Total Units<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Total iOS devices the app has been downloaded to (51 first-time downloads + 14 redownloads = 65 total).</span></span></span>
                             <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400"><i data-lucide="smartphone" class="w-4 h-4"></i></div>
                         </div>
                         <div class="text-3xl font-extrabold text-white mt-3 font-mono">65</div>
@@ -398,7 +444,7 @@
 
                     <div class="glass-panel rounded-xl p-5 border border-slate-800/80">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Store Rating</span>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center">Store Rating<span class="tooltip-wrap ml-1.5 cursor-help inline-flex text-slate-500 hover:text-indigo-400 transition-colors"><i data-lucide="info" class="w-3.5 h-3.5"></i><span class="tooltip-box">Your public average customer star rating on the Apple App Store (currently a perfect 5.0 out of 5 stars).</span></span></span>
                             <div class="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400"><i data-lucide="star" class="w-4 h-4"></i></div>
                         </div>
                         <div class="text-3xl font-extrabold text-amber-400 mt-3 font-mono">5.0 <span class="text-base text-slate-400 font-sans">★</span></div>
