@@ -419,13 +419,55 @@
                         </div>
                     </div>
 
-                    <div class="glass-panel rounded-2xl p-6 border border-slate-800/80">
-                        <h3 class="text-base font-bold text-white mb-1 flex items-center space-x-2">
-                            <i data-lucide="globe" class="w-4 h-4 text-sky-400"></i>
-                            <span>Top Installs by Country</span>
-                        </h3>
-                        <p class="text-xs text-slate-400 mb-6">Units installed across global App Store storefronts</p>
-                        <div class="h-64">
+                    <div class="glass-panel rounded-2xl p-6 border border-slate-800/80 space-y-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <h3 class="text-base font-bold text-white flex items-center space-x-2">
+                                    <i data-lucide="globe-2" class="w-4 h-4 text-sky-400"></i>
+                                    <span>Global Geographic Distribution</span>
+                                </h3>
+                                <p class="text-xs text-slate-400 mt-0.5">Verified App Store installs & user units by country</p>
+                            </div>
+                            <div class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono">
+                                <span class="text-slate-400">Total Global Units:</span>
+                                <span class="text-white font-extrabold text-sm">188</span>
+                            </div>
+                        </div>
+
+                        <!-- Top 4 Highlight Badges -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
+                            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="text-slate-300 font-medium truncate">🇵🇰 Pakistan</span>
+                                    <span class="text-indigo-400 font-bold font-mono">54%</span>
+                                </div>
+                                <div class="text-lg font-extrabold text-white font-mono mt-1">101 <span class="text-[11px] text-slate-400 font-sans font-normal">units</span></div>
+                            </div>
+                            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="text-slate-300 font-medium truncate">🇬🇧 United Kingdom</span>
+                                    <span class="text-sky-400 font-bold font-mono">16%</span>
+                                </div>
+                                <div class="text-lg font-extrabold text-white font-mono mt-1">30 <span class="text-[11px] text-slate-400 font-sans font-normal">units</span></div>
+                            </div>
+                            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="text-slate-300 font-medium truncate">🇺🇸 United States</span>
+                                    <span class="text-blue-400 font-bold font-mono">9%</span>
+                                </div>
+                                <div class="text-lg font-extrabold text-white font-mono mt-1">17 <span class="text-[11px] text-slate-400 font-sans font-normal">units</span></div>
+                            </div>
+                            <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="text-slate-300 font-medium truncate">🇳🇬 Nigeria</span>
+                                    <span class="text-emerald-400 font-bold font-mono">7%</span>
+                                </div>
+                                <div class="text-lg font-extrabold text-white font-mono mt-1">13 <span class="text-[11px] text-slate-400 font-sans font-normal">units</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Country Bar Chart with Exact Counts -->
+                        <div class="h-56 mt-2">
                             <canvas id="chart-apple-geo"></canvas>
                         </div>
                     </div>
@@ -1033,12 +1075,20 @@
                 type: 'bar',
                 indexAxis: 'y',
                 data: {
-                    labels: topC.map(c => countryNameMap[c.country] || c.country),
+                    labels: topC.map(c => (countryNameMap[c.country] || c.country) + ' (' + c.units + ' units)'),
                     datasets: [{
-                        label: 'Total Units',
+                        label: 'App Units Installed',
                         data: topC.map(c => c.units),
-                        backgroundColor: 'rgba(129, 140, 248, 0.85)',
-                        borderRadius: 6
+                        backgroundColor: [
+                            'rgba(99, 102, 241, 0.9)',
+                            'rgba(56, 189, 248, 0.9)',
+                            'rgba(129, 140, 248, 0.9)',
+                            'rgba(16, 185, 129, 0.9)',
+                            'rgba(245, 158, 11, 0.9)',
+                            'rgba(244, 63, 94, 0.9)'
+                        ],
+                        borderRadius: 6,
+                        barThickness: 16
                     }]
                 },
                 options: {
