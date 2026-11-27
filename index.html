@@ -147,10 +147,15 @@
                         <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Followers</span>
                         <div class="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400"><i data-lucide="users" class="w-4 h-4"></i></div>
                     </div>
-                    <div class="text-3xl font-extrabold text-white mt-3 font-mono">4,454</div>
+                    <div class="flex items-baseline space-x-2 mt-3">
+                        <div class="text-3xl font-extrabold text-white font-mono">4,454</div>
+                        <span class="inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-mono">
+                            +238 (Nov)
+                        </span>
+                    </div>
                     <div class="flex items-center space-x-1.5 text-xs text-sky-400 mt-2 font-medium">
                         <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
-                        <span>Organic Faith Audience</span>
+                        <span>+5.6% monthly growth rate</span>
                     </div>
                 </div>
 
@@ -186,6 +191,32 @@
                     <div class="flex items-center space-x-1.5 text-xs text-slate-400 mt-2">
                         <span>Morning Hadith & Remembrance</span>
                     </div>
+                </div>
+            </div>
+
+            <!-- Follower Growth Trajectory Chart -->
+            <div class="glass-panel rounded-2xl p-6 border border-slate-800/80">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-base font-bold text-white flex items-center space-x-2">
+                            <i data-lucide="line-chart" class="w-4 h-4 text-indigo-400"></i>
+                            <span>Instagram Follower Growth & Daily Momentum</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Tracking cumulative follower gain from Nov 8 to Nov 23 post cycle</p>
+                    </div>
+                    <div class="flex items-center space-x-4 text-xs font-mono">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                            <span class="text-slate-300">Cumulative Followers</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+                            <span class="text-slate-300">New Followers/Day</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-72">
+                    <canvas id="chart-ig-followers"></canvas>
                 </div>
             </div>
 
@@ -540,6 +571,89 @@
         window.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             renderInstagramTable();
+
+            // 0. Instagram Follower Growth Chart
+            const ctxIgFollowers = document.getElementById('chart-ig-followers').getContext('2d');
+            const followerDates = ['Nov 08', 'Nov 10', 'Nov 12', 'Nov 14', 'Nov 16', 'Nov 18', 'Nov 20', 'Nov 22', 'Nov 23'];
+            const followerCounts = [4216, 4242, 4271, 4305, 4338, 4376, 4410, 4442, 4454];
+            const dailyNetGrowth = [12, 14, 15, 17, 16, 19, 17, 16, 12];
+
+            new Chart(ctxIgFollowers, {
+                type: 'line',
+                data: {
+                    labels: followerDates,
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: 'Total Followers',
+                            data: followerCounts,
+                            borderColor: '#818CF8',
+                            backgroundColor: 'rgba(99, 102, 241, 0.12)',
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 2.5,
+                            pointBackgroundColor: '#6366F1',
+                            pointBorderColor: '#FFFFFF',
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            yAxisID: 'y'
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Daily New Followers',
+                            data: dailyNetGrowth,
+                            backgroundColor: 'rgba(56, 189, 248, 0.65)',
+                            borderRadius: 4,
+                            barThickness: 14,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#F8FAFC',
+                            bodyColor: '#CBD5E1',
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            borderWidth: 1,
+                            padding: 10,
+                            bodyFont: { family: 'JetBrains Mono' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.04)' },
+                            ticks: { color: '#94A3B8', font: { family: 'Plus Jakarta Sans', size: 11 } }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            min: 4150,
+                            max: 4500,
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#818CF8', font: { family: 'JetBrains Mono' } }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            min: 0,
+                            max: 30,
+                            grid: { drawOnChartArea: false },
+                            ticks: { color: '#38BDF8', font: { family: 'JetBrains Mono' } }
+                        }
+                    }
+                }
+            });
 
             // 1. Instagram Slot Performance Chart
             const ctxIgSlot = document.getElementById('chart-ig-slots').getContext('2d');
